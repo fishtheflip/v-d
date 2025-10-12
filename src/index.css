@@ -1,0 +1,25 @@
+/* дайте теме MUI рулить цветами */
+:root {
+  color-scheme: light dark; /* можно оставить */
+}
+
+/* сброс размеров и отступов */
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+html, body, #root { font-family: inherit; }
+
+
+/* НИКАКОГО flex на body */
+body {
+  /* display: flex;        ← убрать */
+  /* place-items: center;  ← убрать */
+  /* min-width: 320px;     ← убрать (если не нужен жёсткий минимум) */
+  min-height: 100vh;       /* можно оставить */
+}
+
+/* остальное — по желанию */
+a { text-decoration: none; }

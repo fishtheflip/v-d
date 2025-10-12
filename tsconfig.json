@@ -1,0 +1,14 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "strict": true,
+    "types": ["react", "react-dom"]
+  }
+}
