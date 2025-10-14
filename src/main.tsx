@@ -56,10 +56,6 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/video" element={<VimeoPlayer />} />
             <Route path="/video/:id" element={<VimeoPlayer />} />
             <Route path="*" element={<NotFoundPageWeb />} />
-
-            
-
-            
           </Route>
 
           {/* Публичные страницы */}

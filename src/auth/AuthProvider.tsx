@@ -69,7 +69,7 @@ import {
           city: 'ALMIGTHY',
           createdAt: serverTimestamp(),
           status: 'prem',
-          availableCourses: ['krump1'],
+          availableCourses: [''],
           premPass: 0,
           payPass: 0,
           userCourses: [],
