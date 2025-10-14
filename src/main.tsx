@@ -11,7 +11,7 @@ import Login from './pages/LoginPage';
 import RegisterPage from './pages/Register';
 import LandingPage from './pages/LandingPage';
 import CoursePageWeb from './pages/CoursesPageWeb';
-import { Route, Routes, Navigate, Outlet, useLocation, HashRouter } from 'react-router-dom';
+import { Route, Routes, Navigate, Outlet, useLocation, BrowserRouter } from 'react-router-dom';
 import AppShell from './shell/AppShell';
 import { AuthProvider, useAuth } from './auth/AuthProvider';
 import AuthorPageWeb from './pages/AuthorPage';
@@ -21,7 +21,7 @@ import SupportPageWeb from './pages/SupportPageWeb';
 import PremiumPageWeb from './pages/PremiumPageWeb';
 import NotFoundPageWeb from './pages/NotFoundPage';
 import VimeoPlayer from './pages/VimeoPlayer'
-
+import LinksPage from './pages/LinksPage'
 // 🔒 Гард защищённых роутов
 function ProtectedRoute() {
   const { user, loading } = useAuth();
@@ -36,7 +36,7 @@ function ProtectedRoute() {
 
 createRoot(document.getElementById('root')!).render(
   <AuthProvider>
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         {/* Общий layout */}
         <Route element={<AppShell />}>
@@ -66,10 +66,13 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/landing" element={<LandingPage />} />
+          <Route path="/links" element={<LinksPage />} />
+
+          
           {/* Fallback */}
           {/* <Route path="*" element={<Navigate to="/landing" replace />} /> */}
         </Route>
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   </AuthProvider>
 );

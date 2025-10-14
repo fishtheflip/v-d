@@ -31,7 +31,7 @@ const tabs: Tab[] = [
 
 const HIDE_NAV_ON = [
   '/login', '/register', '/forgot-password', '/landing',
-  '/my-course', '/my-cert', '/support',
+  '/my-course', '/my-cert', '/support', '/links'
 ];
 
 export default function AppShell() {
