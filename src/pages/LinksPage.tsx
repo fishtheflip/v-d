@@ -12,7 +12,7 @@ import {
 import LanguageRoundedIcon from '@mui/icons-material/LanguageRounded';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import AppleIcon from '@mui/icons-material/Apple';
-import AndroidIcon from '@mui/icons-material/Android';
+// import AndroidIcon from '@mui/icons-material/Android';
 import { Link as RouterLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import logo from '../assets/vite-dance-logo.png'; // <-- добавь файл сюда
