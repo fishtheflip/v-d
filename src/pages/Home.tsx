@@ -198,7 +198,14 @@ export default function HomePageWeb() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const hello = useMemo(() => (user?.displayName ? `Привет, ${user.displayName}` : undefined), [user]);
+  const hello = useMemo(() => {
+    const name = user?.displayName?.trim();
+    if (!name) return undefined;
+  
+    return name.toLowerCase() === 'айым'
+      ? `Bonjour 😘 ${name}`
+      : `Привет, ${name}`;
+  }, [user?.displayName]);
 
   return (
     <Box sx={{ bgcolor: '#f7f9fc', minHeight: '100dvh', color: 'text.primary' }}>
