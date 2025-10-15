@@ -66,7 +66,7 @@ createRoot(document.getElementById('root')!).render(
 
           
           {/* Fallback */}
-          {/* <Route path="*" element={<Navigate to="/landing" replace />} /> */}
+          <Route path="*" element={<Navigate to="/landing" replace />} />
         </Route>
       </Routes>
     </BrowserRouter>

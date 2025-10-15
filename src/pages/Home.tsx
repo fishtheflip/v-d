@@ -198,11 +198,12 @@ export default function HomePageWeb() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
   const hello = useMemo(() => {
     const name = user?.displayName?.trim();
     if (!name) return undefined;
   
-    return name.toLowerCase() === 'айым'
+    return (name === 'Адеми' || name === 'айым')
       ? `Bonjour 😘 ${name}`
       : `Привет, ${name}`;
   }, [user?.displayName]);
