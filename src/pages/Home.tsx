@@ -91,13 +91,13 @@ async function cachedFetch<T>(key: string, fetcher: () => Promise<T>): Promise<T
 // =====================
 // 🧩 Вспомогалки
 // =====================
-const EMOJIS = ['🔥', '🎵', '💥', '🧢', '✨', '🎧', '👟', '🪩', '🤸‍♂️', '⚡️'];
+const EMOJIS = ['', '', '', '', '', '', '', '', '', ''];
 const addIcons = (items: Category[]): Category[] => {
   let i = 0;
   return items.map((item) => {
     let icon = EMOJIS[i++ % EMOJIS.length];
-    if (item.name === 'Hobby Male') icon = '🚹';
-    else if (item.name === 'Hobby Female') icon = '🚺';
+    if (item.name === 'Hobby Male') icon = '';
+    else if (item.name === 'Hobby Female') icon = '';
     return { ...item, icon };
   });
 };
