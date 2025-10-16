@@ -280,11 +280,11 @@ export default function HomePageWeb() {
 
           {/* Категории */}
           <SectionHeader title="Категории" />
-          <Scroller
+          {/* <Scroller
             refEl={catRef}
             onPrev={() => scrollBy(catRef.current, -1)}
             onNext={() => scrollBy(catRef.current, 1)}
-          >
+          > */}
             <Box
               ref={catRef}
               sx={{
@@ -323,7 +323,7 @@ export default function HomePageWeb() {
                 />
               ))}
             </Box>
-          </Scroller>
+          {/* </Scroller> */}
 
           {/* Популярное */}
           <Typography variant="h5" sx={{ mt: 3, mb: 1.5, fontWeight: 800, fontSize: { xs: 20, md: 24 } }}>

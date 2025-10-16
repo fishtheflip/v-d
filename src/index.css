@@ -1,25 +1,55 @@
-/* дайте теме MUI рулить цветами */
+/* пусть MUI рулит темой, ок */
 :root {
-  color-scheme: light dark; /* можно оставить */
+  color-scheme: light dark;
+  /* safe-area переменные */
+  --safe-top: env(safe-area-inset-top);
+  --safe-right: env(safe-area-inset-right);
+  --safe-bottom: env(safe-area-inset-bottom);
+  --safe-left: env(safe-area-inset-left);
 }
 
 /* сброс размеров и отступов */
 html, body, #root {
   width: 100%;
-  height: 100%;
+  height: 100%;           /* базовая высота */
   margin: 0;
   padding: 0;
+  -webkit-text-size-adjust: 100%;
 }
-html, body, #root { font-family: inherit; }
 
+html, body, #root { font-family: inherit; }
 
 /* НИКАКОГО flex на body */
 body {
-  /* display: flex;        ← убрать */
-  /* place-items: center;  ← убрать */
-  /* min-width: 320px;     ← убрать (если не нужен жёсткий минимум) */
-  min-height: 100vh;       /* можно оставить */
+  /* display: flex;       ← не надо */
+  /* place-items: center; ← не надо */
+  /* min-width: 320px;    ← по желанию */
+  min-height: 100%;       /* базовый минимум */
+  padding-bottom: max(var(--safe-bottom), 0px);  /* не упираемся в жест снизу */
+  background: #F8FAFC;    /* чтобы не было «просветов» при address-bar резайзе */
 }
 
-/* остальное — по желанию */
-a { text-decoration: none; }
+/* Контейнер страницы: используем новые viewport-юниты с фоллбэком */
+.page-full-height {
+  /* порядок важен: сначала старый, затем новые */
+  min-height: 100vh;      /* fallback на случай очень старых браузеров */
+  min-height: 100svh;     /* small viewport height — учитывает скрытую панель */
+  min-height: 100dvh;     /* dynamic viewport height — актуально для Chrome/OneUI */
+}
+
+/* медиа/картинки, чтобы ничто не «выпирало» */
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* если есть фиксированный нижний бар — дайте ему safe-area */
+.bottom-safe {
+  padding-bottom: max(var(--safe-bottom), 0px);
+}
+
+/* чтобы скролл не «прыгал» от address bar */
+html, body {
+  overscroll-behavior-y: contain; /* по желанию */
+}
