@@ -28,14 +28,14 @@ type Course = {
   popular?: boolean;
   popPriority?: number;
 };
-type Choreo = { id: string; name: string; Author?: string; imgUrl?: string };
+type Choreo = { id: string; name: string; Author?: string; imgUrl?: string; simpId?: string };
 
 // =====================
 // 🔒 Простой кэш с TTL
 // =====================
 type CacheEntry<T> = { data: T; ts: number };
 type InFlightMap = Record<string, Promise<any> | undefined>;
-const TTL_MS = 60 * 60 * 1000; // 1 час
+const TTL_MS = 1 * 60 * 1000; // 1 час
 const LS_PREFIX = 'home_cache:'; // префикс ключей в localStorage
 const memCache = new Map<string, CacheEntry<any>>();
 const inFlight: InFlightMap = {};
@@ -132,6 +132,19 @@ export default function HomePageWeb() {
     navigate(`/course/${slug}`, { state: c });
   };
 
+  // 👉 переход к хореографии (как openCourse, но с другим payload)
+  const openChoreo = (ch: Choreo) => {
+    navigate('/course', {
+      state: {
+        courseName: ch.name,
+        imgUrl: ch.imgUrl,
+        authorTitle: ch.Author,
+        simpId: ch.simpId,
+        from: 'choreo',
+      },
+    });
+  };
+
   // ================
   // 🔽 Фетчеры с кэшем
   // ================
@@ -198,11 +211,9 @@ export default function HomePageWeb() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
   const hello = useMemo(() => {
     const name = user?.displayName?.trim();
     if (!name) return undefined;
-  
     return (name === 'Адеми' || name === 'айым')
       ? `Bonjour 😘 ${name}`
       : `Привет, ${name}`;
@@ -280,50 +291,44 @@ export default function HomePageWeb() {
 
           {/* Категории */}
           <SectionHeader title="Категории" />
-          {/* <Scroller
-            refEl={catRef}
-            onPrev={() => scrollBy(catRef.current, -1)}
-            onNext={() => scrollBy(catRef.current, 1)}
-          > */}
-            <Box
-              ref={catRef}
-              sx={{
-                display: 'flex',
-                gap: 1.5,
-                overflowX: 'auto',
-                pb: 1,
-                scrollSnapType: 'x mandatory',
-                '::-webkit-scrollbar': { display: 'none' },
-                opacity: loading ? 0.8 : 1,
-              }}
-            >
-              {(loading && !categories.length
-                ? Array.from({ length: 8 }).map((_, i) => ({ id: `s${i}`, name: '…', icon: '⏳' }))
-                : categories
-              ).map((c) => (
-                <Chip
-                  key={c.id}
-                  label={
-                    <Stack direction="row" spacing={1} alignItems="center">
-                      <span style={{ fontSize: isMdUp ? 18 : 16 }}>{c.icon ?? '✨'}</span>
-                      <span>{c.name}</span>
-                    </Stack>
-                  }
-                  clickable
-                  disabled={loading && !categories.length}
-                  sx={{
-                    flex: '0 0 auto',
-                    px: 1,
-                    height: { xs: 38, sm: 42, md: 46 },
-                    borderRadius: 3,
-                    bgcolor: '#fff',
-                    border: '1px solid #E5E9EF',
-                    scrollSnapAlign: 'start',
-                  }}
-                />
-              ))}
-            </Box>
-          {/* </Scroller> */}
+          <Box
+            ref={catRef}
+            sx={{
+              display: 'flex',
+              gap: 1.5,
+              overflowX: 'auto',
+              pb: 1,
+              scrollSnapType: 'x mandatory',
+              '::-webkit-scrollbar': { display: 'none' },
+              opacity: loading ? 0.8 : 1,
+            }}
+          >
+            {(loading && !categories.length
+              ? Array.from({ length: 8 }).map((_, i) => ({ id: `s${i}`, name: '…', icon: '⏳' }))
+              : categories
+            ).map((c) => (
+              <Chip
+                key={c.id}
+                label={
+                  <Stack direction="row" spacing={1} alignItems="center">
+                    <span style={{ fontSize: isMdUp ? 18 : 16 }}>{c.icon ?? '✨'}</span>
+                    <span>{c.name}</span>
+                  </Stack>
+                }
+                clickable
+                disabled={loading && !categories.length}
+                sx={{
+                  flex: '0 0 auto',
+                  px: 1,
+                  height: { xs: 38, sm: 42, md: 46 },
+                  borderRadius: 3,
+                  bgcolor: '#fff',
+                  border: '1px solid #E5E9EF',
+                  scrollSnapAlign: 'start',
+                }}
+              />
+            ))}
+          </Box>
 
           {/* Популярное */}
           <Typography variant="h5" sx={{ mt: 3, mb: 1.5, fontWeight: 800, fontSize: { xs: 20, md: 24 } }}>
@@ -447,7 +452,11 @@ export default function HomePageWeb() {
           <Paper elevation={0} sx={{ borderRadius: 3, overflow: 'hidden', opacity: loading ? 0.85 : 1 }}>
             {(loading && !choreos.length ? [] : choreos).map((ch, i) => (
               <Box key={ch.id}>
-                <ListItemButton sx={{ py: { xs: 1, md: 1.25 } }} disabled={loading && !choreos.length}>
+                <ListItemButton
+                  sx={{ py: { xs: 1, md: 1.25 } }}
+                  disabled={loading && !choreos.length}
+                  onClick={() => openChoreo(ch)} // ← навигация как openCourse(c)
+                >
                   <ListItemAvatar>
                     <Avatar
                       variant="rounded"

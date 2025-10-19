@@ -27,7 +27,7 @@ type Teacher = {
 };
 
 // ====== КЭШ (TTL = 1 час) ======
-const TTL_MS = 60 * 60 * 1000; // 1 час
+const TTL_MS = 1 * 60 * 1000; // 1 час
 const K_AUTHORS = 'notes:authors';
 
 type CacheBox<T> = { ts: number; data: T };

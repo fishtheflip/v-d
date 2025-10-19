@@ -72,9 +72,15 @@ export default function VideoPageWeb() {
 
   // Принимаем данные из state, либо соберём из query/params при необходимости
   const courseItem = state ?? {};
-
+  console.log('CCC', courseItem)
+  function cleanUndefinedLine(str?: string): string {
+    if (!str) return '';
+    return str
+      .replace(/^undefined\s*[—-]?\s*/i, '') // убирает "undefined — " в начале
+      .trim();
+  }
   const pageTitle: string =
-    courseItem?.name || courseItem?.courseName || 'Видео';
+  cleanUndefinedLine(courseItem?.name) || courseItem?.courseName || 'Видео';
 
   const pageDescription: string =
     courseItem?.description ||

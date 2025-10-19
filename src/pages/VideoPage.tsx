@@ -1,7 +1,9 @@
+// src/pages/VideosPageWeb.tsx
 import {
   Box, Container, Typography, Stack, IconButton,
   Card, CardActionArea, CardMedia, CardContent, Button,
   ToggleButton, ToggleButtonGroup, Snackbar, Alert as MUIAlert, Collapse,
+  Chip, CircularProgress, // ← добавил
 } from '@mui/material';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
@@ -9,9 +11,7 @@ import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import { useEffect, useMemo, useState } from 'react';
 
 import { db } from '../lib/firebase';
-import {
-  collection, getDocs, query,
-} from 'firebase/firestore';
+import { collection, getDocs, query } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 type TabKind = 'course' | 'choreo';
@@ -35,7 +35,7 @@ type Choreo = {
 };
 
 // ====== КЭШ (TTL = 1 час) ======
-const TTL_MS = 60 * 60 * 1000; // 1 час
+const TTL_MS = 1 * 60 * 1000; // 1 час
 const K_COURSES = 'videos:courses';
 const K_CHOREOS = 'videos:choreos';
 
@@ -53,7 +53,6 @@ function readCache<T>(key: string): T | null {
     return null;
   }
 }
-
 function writeCache<T>(key: string, data: T) {
   try {
     const box: CacheBox<T> = { ts: Date.now(), data };
@@ -93,8 +92,8 @@ export default function VideosPageWeb() {
       if (cachedCourses && cachedChoreos) {
         setCourses(cachedCourses);
         setChoreos(cachedChoreos);
-        setLoading(false); // уже можем отрисовать
-        return; // свежий кэш — выходим (без запроса к Firestore)
+        setLoading(false);
+        return;
       }
 
       // 2) Иначе тянем из Firestore
@@ -143,6 +142,7 @@ export default function VideosPageWeb() {
   }, []);
 
   const list = useMemo(() => (tab === 'course' ? courses : choreos), [tab, courses, choreos]);
+  const loadingTitle = tab === 'course' ? 'Загружаем курсы…' : 'Загружаем хореографии…';
 
   const openCourse = (item: Course | Choreo) => {
     if (tab === 'course') {
@@ -167,24 +167,18 @@ export default function VideosPageWeb() {
     <Box sx={{ bgcolor: '#F8FAFC', minHeight: '100dvh', pb: 9 }}>
       <Container maxWidth={false} disableGutters sx={{ px: { xs: 1.5, sm: 2 }, pt: 2 }}>
         <Box sx={{ width: '100%', maxWidth: 1400, mx: 'auto' }}>
+          {/* Верхний алерт как в NotesPageWeb */}
           <Collapse in={!!error}>
             <MUIAlert
               severity="error"
               variant="filled"
               sx={{ mb: 2, borderRadius: 2 }}
               action={
-                <ToggleButton
-                  value="retry"
+                <Chip
+                  label={loading ? 'Загружаем…' : 'Повторить'}
                   onClick={() => loadData({ force: true })}
-                  sx={{
-                    textTransform: 'none',
-                    borderRadius: '28px',
-                    px: 2, py: 0.75,
-                    color: '#fff', border: '1px solid rgba(255,255,255,0.4)'
-                  }}
-                >
-                  {loading ? 'Загружаем…' : 'Повторить'}
-                </ToggleButton>
+                  sx={{ bgcolor: 'rgba(255,255,255,0.25)', color: '#fff', fontWeight: 700 }}
+                />
               }
             >
               {error}
@@ -195,7 +189,7 @@ export default function VideosPageWeb() {
             value={tab}
             exclusive
             onChange={(_, v) => v && setTab(v)}
-            sx={{ mb: 2 }}
+            sx={{ mb: 2, opacity: loading && !error ? 0.9 : 1 }}
           >
             <ToggleButton
               value="course"
@@ -216,138 +210,145 @@ export default function VideosPageWeb() {
             </ToggleButton>
           </ToggleButtonGroup>
 
-          <Box
-            sx={{
-              display: 'grid',
-              gap: { xs: 1.5, md: 2 },
-              gridTemplateColumns: { xs: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
-              alignItems: 'stretch',
-              opacity: loading ? 0.85 : 1,
-            }}
-          >
-            {list.map((v) => {
-              const id = v.id;
-              const isCourse = tab === 'course';
-              const title = isCourse ? (v as Course).courseName : (v as Choreo).name;
-              const teacher = isCourse ? (v as Course).authorTitle ?? '' : (v as Choreo).Author ?? '';
-              const seasons = isCourse ? (v as Course).seasonNum ?? 1 : 1;
-              const image =
-                (v as any).imgUrl ||
-                'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200&auto=format&fit=crop';
+          {/* Центральный лоадер, если данных ещё нет */}
+          {loading && list.length === 0 ? (
+            <Stack alignItems="center" justifyContent="center" sx={{ py: 8 }}>
+              <CircularProgress />
+              <Typography sx={{ mt: 2, color: 'text.secondary' }}>{loadingTitle}</Typography>
+            </Stack>
+          ) : (
+            <Box
+              sx={{
+                display: 'grid',
+                gap: { xs: 1.5, md: 2 },
+                gridTemplateColumns: { xs: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
+                alignItems: 'stretch',
+                opacity: loading ? 0.85 : 1, // лёгкое затухание при дозагрузке
+              }}
+            >
+              {list.map((v) => {
+                const id = v.id;
+                const isCourse = tab === 'course';
+                const title = isCourse ? (v as Course).courseName : (v as Choreo).name;
+                const teacher = isCourse ? (v as Course).authorTitle ?? '' : (v as Choreo).Author ?? '';
+                const seasons = isCourse ? (v as Course).seasonNum ?? 1 : 1;
+                const image =
+                  (v as any).imgUrl ||
+                  'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200&auto=format&fit=crop';
 
-              const isLiked = liked[id] ?? false;
+                const isLiked = liked[id] ?? false;
 
-              return (
-                <Card
-                  key={id}
-                  elevation={0}
-                  sx={{
-                    borderRadius: 3,
-                    bgcolor: '#fff',
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                  }}
-                >
-                  <Box sx={{ position: 'relative' }}>
-                    <CardMedia
-                      component="img"
-                      image={image}
-                      alt={title}
-                      sx={{
-                        width: '100%',
-                        aspectRatio: '16 / 9',
-                        objectFit: 'cover',
-                        borderTopLeftRadius: 12,
-                        borderTopRightRadius: 12,
-                        display: 'block',
-                      }}
-                    />
-                    <IconButton
-                      onClick={(e) => { e.stopPropagation(); toggleLike(id); }}
-                      sx={{
-                        position: 'absolute', top: 8, right: 8,
-                        bgcolor: 'rgba(255,255,255,0.85)',
-                        '&:hover': { bgcolor: 'rgba(255,255,255,0.95)' }
-                      }}
-                    >
-                      {isLiked ? <FavoriteRoundedIcon color="error" /> : <FavoriteBorderOutlinedIcon />}
-                    </IconButton>
-                  </Box>
-
-                  <CardActionArea
-                    onClick={() => openCourse(v)}
+                return (
+                  <Card
+                    key={id}
+                    elevation={0}
                     sx={{
-                      borderBottomLeftRadius: 12,
-                      borderBottomRightRadius: 12,
+                      borderRadius: 3,
+                      bgcolor: '#fff',
                       height: '100%',
                       display: 'flex',
+                      flexDirection: 'column',
                     }}
                   >
-                    <CardContent
+                    <Box sx={{ position: 'relative' }}>
+                      <CardMedia
+                        component="img"
+                        image={image}
+                        alt={title}
+                        sx={{
+                          width: '100%',
+                          aspectRatio: '16 / 9',
+                          objectFit: 'cover',
+                          borderTopLeftRadius: 12,
+                          borderTopRightRadius: 12,
+                          display: 'block',
+                        }}
+                      />
+                      <IconButton
+                        onClick={(e) => { e.stopPropagation(); toggleLike(id); }}
+                        sx={{
+                          position: 'absolute', top: 8, right: 8,
+                          bgcolor: 'rgba(255,255,255,0.85)',
+                          '&:hover': { bgcolor: 'rgba(255,255,255,0.95)' }
+                        }}
+                      >
+                        {isLiked ? <FavoriteRoundedIcon color="error" /> : <FavoriteBorderOutlinedIcon />}
+                      </IconButton>
+                    </Box>
+
+                    <CardActionArea
+                      onClick={() => openCourse(v)}
                       sx={{
+                        borderBottomLeftRadius: 12,
+                        borderBottomRightRadius: 12,
+                        height: '100%',
                         display: 'flex',
-                        flexDirection: 'column',
-                        gap: 1,
-                        width: '100%',
-                        minHeight: 120,
-                        py: 1.25,
                       }}
                     >
-                      <Typography sx={{ fontWeight: 800, fontSize: 16, lineHeight: 1.25 }}>
-                        {title}
-                      </Typography>
-
-                      <Stack
-                        direction="row"
-                        spacing={1}
-                        alignItems="center"
-                        justifyContent="space-between"
-                        sx={{ mt: 0.5 }}
+                      <CardContent
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: 1,
+                          width: '100%',
+                          minHeight: 120,
+                          py: 1.25,
+                        }}
                       >
-                        <Stack direction="row" spacing={1} alignItems="center" sx={{ minWidth: 0 }}>
-                          <Typography sx={{ color: '#F97316', fontWeight: 700, whiteSpace: 'nowrap' }}>
-                            {teacher || '—'}
-                          </Typography>
-                          <Typography sx={{ color: '#1F2937' }}>•</Typography>
-                          <Typography sx={{ color: '#64748B', whiteSpace: 'nowrap' }}>
-                            {seasons} сезон
-                          </Typography>
-                        </Stack>
+                        <Typography sx={{ fontWeight: 800, fontSize: 16, lineHeight: 1.25 }}>
+                          {title}
+                        </Typography>
 
-                        {/* Оранжевая кнопка «Смотреть» — адаптивная */}
-                        <Button
-                          size="small"
-                          sx={{
-                            ml: 1,
-                            flexShrink: 0,
-                            borderRadius: 999,
-                            px: { xs: 0.75, sm: 1.75 },
-                            py: { xs: 0.5,  sm: 0.5 },
-                            minWidth: { xs: 36,  sm: 'auto' },
-                            height:   { xs: 36,  sm: 'auto' },
-                            fontWeight: 800,
-                            textTransform: 'none',
-                            bgcolor: '#F97316',
-                            color: '#fff',
-                            '&:hover': { bgcolor: '#ea6a11' },
-                            boxShadow: '0 6px 16px rgba(249,115,22,0.28)',
-                          }}
+                        <Stack
+                          direction="row"
+                          spacing={1}
+                          alignItems="center"
+                          justifyContent="space-between"
+                          sx={{ mt: 0.5 }}
                         >
-                          {/* xs: иконка, sm+: текст + иконка */}
-                          <PlayArrowRoundedIcon sx={{ display: { xs: 'inline-flex', sm: 'none' } }} />
-                          <Box component="span" sx={{ display: { xs: 'none', sm: 'inline' } }}>
-                            Смотреть
-                          </Box>
-                          <PlayArrowRoundedIcon sx={{ ml: 0.5, display: { xs: 'none', sm: 'inline-flex' } }} />
-                        </Button>
-                      </Stack>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              );
-            })}
-          </Box>
+                          <Stack direction="row" spacing={1} alignItems="center" sx={{ minWidth: 0 }}>
+                            <Typography sx={{ color: '#F97316', fontWeight: 700, whiteSpace: 'nowrap' }}>
+                              {teacher || '—'}
+                            </Typography>
+                            <Typography sx={{ color: '#1F2937' }}>•</Typography>
+                            <Typography sx={{ color: '#64748B', whiteSpace: 'nowrap' }}>
+                              {seasons} сезон
+                            </Typography>
+                          </Stack>
+
+                          {/* Оранжевая кнопка «Смотреть» — адаптивная */}
+                          <Button
+                            size="small"
+                            sx={{
+                              ml: 1,
+                              flexShrink: 0,
+                              borderRadius: 999,
+                              px: { xs: 0.75, sm: 1.75 },
+                              py: { xs: 0.5,  sm: 0.5 },
+                              minWidth: { xs: 36,  sm: 'auto' },
+                              height:   { xs: 36,  sm: 'auto' },
+                              fontWeight: 800,
+                              textTransform: 'none',
+                              bgcolor: '#F97316',
+                              color: '#fff',
+                              '&:hover': { bgcolor: '#ea6a11' },
+                              boxShadow: '0 6px 16px rgba(249,115,22,0.28)',
+                            }}
+                          >
+                            <PlayArrowRoundedIcon sx={{ display: { xs: 'inline-flex', sm: 'none' } }} />
+                            <Box component="span" sx={{ display: { xs: 'none', sm: 'inline' } }}>
+                              Смотреть
+                            </Box>
+                            <PlayArrowRoundedIcon sx={{ ml: 0.5, display: { xs: 'none', sm: 'inline-flex' } }} />
+                          </Button>
+                        </Stack>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                );
+              })}
+            </Box>
+          )}
         </Box>
       </Container>
 
