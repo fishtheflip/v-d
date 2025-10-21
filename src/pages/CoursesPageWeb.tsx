@@ -312,29 +312,55 @@ export default function CoursePageWeb() {
           </Collapse>
 
           {/* cover */}
-          <Box sx={{ position: 'relative', zIndex: 0, overflow: 'hidden', opacity: loading ? 0.85 : 1 }}>
-            {/* placeholder из public пока основная не прогрузится */}
-            {(!heroSrc || !heroReady) && (
-              <Box
-                component="img"
-                src={`${import.meta.env.BASE_URL}assets/feature.png`}
-                alt={`${title} (placeholder)`}
-                sx={{ width: '100%', height: { xs: 220, sm: 280, md: 340 }, objectFit: 'cover', display: 'block' }}
-              />
-            )}
-            {heroSrc && heroReady && (
-              <Box
-                component="img"
-                src={heroSrc}
-                alt={title}
-                sx={{
-                  width: '100%',
-                  height: { xs: 220, sm: 280, md: 340 },
-                  objectFit: 'cover',
-                  display: 'block',
-                }}
-              />
-            )}
+          {/* cover */}
+          <Box sx={{ position: 'relative', zIndex: 0 }}>
+            <Box
+              sx={{
+                position: 'relative',
+                width: '100%',
+                // единый контейнер и для плейсхолдера, и для финального кадра
+                aspectRatio: { xs: '4 / 3', sm: '16 / 9', md: '21 / 9' },
+                overflow: 'hidden',
+                opacity: loading ? 0.85 : 1,
+              }}
+            >
+              {/* Плейсхолдер (до загрузки основного изображения) */}
+              {(!heroSrc || !heroReady) && (
+                <Box
+                  component="img"
+                  src={`${import.meta.env.BASE_URL}assets/feature.png`}
+                  alt={`${title} (placeholder)`}
+                  sx={{
+                    position: 'absolute', inset: 0,
+                    width: '100%', height: '100%',
+                    objectFit: 'cover',
+                    // слегка поднять кадр, чтобы центр не резал головы
+                    objectPosition: { xs: '50% 30%', md: '50% 35%' },
+                    display: 'block',
+                    transform: 'translateZ(0)',   // сглаживает субпиксельные «ступеньки»
+                  }}
+                />
+              )}
+
+              {/* Основное изображение */}
+              {heroSrc && heroReady && (
+                <Box
+                  component="img"
+                  src={heroSrc}
+                  alt={title}
+                  sx={{
+                    position: 'absolute', inset: 0,
+                    width: '100%', height: '100%',
+                    objectFit: 'cover',
+                    // фокус вверх; можно подставить из курса: `${course.coverFocusX}% ${course.coverFocusY}%`
+                    objectPosition: { xs: '50% 30%', md: '50% 35%' },
+                    display: 'block',
+                    willChange: 'transform',
+                    transform: 'translateZ(0)',
+                  }}
+                />
+              )}
+            </Box>
 
             {/* overlay-кнопки */}
             <Box
@@ -359,6 +385,7 @@ export default function CoursePageWeb() {
               </IconButton>
             </Box>
           </Box>
+
 
           {/* details */}
           <Paper
@@ -497,7 +524,7 @@ export default function CoursePageWeb() {
                               textOverflow: 'ellipsis',
                             }}
                           >
-                            <b style={{ color: ORANGE }}>Описание:</b> {l.description}
+                            <b style={{ color: ORANGE }}></b> {l.description}
                           </Typography>
                         </Box>
                       )}
