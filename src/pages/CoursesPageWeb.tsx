@@ -485,7 +485,18 @@ export default function CoursePageWeb() {
                             borderRadius: 1.5,
                           }}
                         >
-                          <Typography variant="body2" sx={{ color: '#2f2f2f' }}>
+                          <Typography
+                            variant="body2"
+                            title={l.description}                // полный текст по hover
+                            sx={{
+                              color: '#2f2f2f',
+                              display: '-webkit-box',
+                              WebkitLineClamp: 2,                // <= максимум 2 строки
+                              WebkitBoxOrient: 'vertical',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                            }}
+                          >
                             <b style={{ color: ORANGE }}>Описание:</b> {l.description}
                           </Typography>
                         </Box>

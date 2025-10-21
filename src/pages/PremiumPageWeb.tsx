@@ -29,7 +29,7 @@ const BORDER = '#E5E9EF';
 // цены редактируются здесь
 const PRICE = {
   dancePass: { kzt: '₸4 990', usd: '$10', rub: '1 000 ₽' },
-  premium:   { kzt: '₸8 900', usd: '$17', rub: '1 400 ₽', period: '/ мес.' },
+  premium:   { kzt: '₸8 990', usd: '$17', rub: '1 400 ₽', period: '/ мес.' },
 };
 const SUPPORT_URL = 'https://t.me/vitedanceapp';
 
@@ -45,6 +45,8 @@ export default function PremiumPageWeb() {
       window.location.href = SUPPORT_URL;
     }
   };
+  const SUPPORT_URL = 'https://t.me/vitedanceapp';
+
   const handleBuyPass   = () => {
     try {
       window.open(SUPPORT_URL, '_blank', 'noopener,noreferrer');

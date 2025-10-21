@@ -213,6 +213,7 @@ export default function HomePageWeb() {
 
   const hello = useMemo(() => {
     const name = user?.displayName?.trim();
+    console.log('USER', user)
     if (!name) return undefined;
     return (name === 'Адеми' || name === 'айым')
       ? `Bonjour 😘 ${name}`
