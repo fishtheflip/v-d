@@ -11,18 +11,19 @@ import {
 } from '@mui/material';
 import LanguageRoundedIcon from '@mui/icons-material/LanguageRounded';
 import TelegramIcon from '@mui/icons-material/Telegram';
-import AppleIcon from '@mui/icons-material/Apple';
+// import AppleIcon from '@mui/icons-material/Apple'; // скрыли iOS кнопку — импорт не нужен
 // import AndroidIcon from '@mui/icons-material/Android';
 import { Link as RouterLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import logo from '../assets/vite-dance-logo.png'; // <-- добавь файл сюда
+import ChatRoundedIcon from '@mui/icons-material/ChatRounded';
 
 const ORANGE = '#E86635';
 
 export default function LinksPage() {
   // SEO: заголовок и meta description
   useEffect(() => {
-    document.title = 'Vite Dance — онлайн платформа по обучению танцев';
+    document.title = 'Vite Dance — Онлайн-платформа по обучению танцам';
     const metaDesc =
       document.querySelector('meta[name="description"]') ||
       (() => {
@@ -31,7 +32,10 @@ export default function LinksPage() {
         document.head.appendChild(m);
         return m;
       })();
-    metaDesc.setAttribute('content', 'Vite Dance — онлайн платформа по обучению танцев. Сайт, Telegram и ссылки на приложения iOS/Android.');
+    metaDesc.setAttribute(
+      'content',
+      'Vite Dance — онлайн платформа по обучению танцев. Сайт, Telegram и ссылки на приложения iOS/Android.'
+    );
   }, []);
 
   return (
@@ -46,7 +50,9 @@ export default function LinksPage() {
         }}
       >
         <Toolbar sx={{ gap: 2 }}>
-          <Typography sx={{ fontWeight: 900, letterSpacing: 0.2 }}>Vite Dance</Typography>
+          <Typography sx={{ fontWeight: 900, letterSpacing: 0.2 }}>
+            Vite Dance
+          </Typography>
           <Box sx={{ flex: 1 }} />
           <Stack direction="row" spacing={1}>
             <Button component={RouterLink} to="/login" color="inherit">
@@ -141,8 +147,8 @@ export default function LinksPage() {
                 Сайт
               </Button>
 
-
-
+              {/* Скрыли iOS App */}
+              {/*
               <Button
                 fullWidth
                 size="large"
@@ -161,12 +167,14 @@ export default function LinksPage() {
               >
                 iOS App
               </Button>
+              */}
 
-              {/* <Button
+              {/* Телеграм-канал / чат */}
+              <Button
                 fullWidth
                 size="large"
-                startIcon={<AndroidIcon />}
-                href="https://play.google.com/store/apps/details?id=com.vitedance"
+                startIcon={<ChatRoundedIcon />}  // ← новая иконка
+                href="https://t.me/vitedanceapp"
                 target="_blank"
                 rel="noopener"
                 variant="outlined"
@@ -175,11 +183,14 @@ export default function LinksPage() {
                   borderColor: 'rgba(255,255,255,0.5)',
                   color: '#fff',
                   fontWeight: 800,
-                  '&:hover': { borderColor: '#fff', backgroundColor: 'rgba(255,255,255,0.06)' },
+                  '&:hover': {
+                    borderColor: '#fff',
+                    backgroundColor: 'rgba(255,255,255,0.06)',
+                  },
                 }}
-              >
-                Android App
-              </Button> */}
+>
+                Подписка / Поддержка
+              </Button>
               <Button
                 fullWidth
                 size="large"
@@ -193,16 +204,22 @@ export default function LinksPage() {
                   borderColor: 'rgba(255,255,255,0.5)',
                   color: '#fff',
                   fontWeight: 800,
-                  '&:hover': { borderColor: '#fff', backgroundColor: 'rgba(255,255,255,0.06)' },
+                  '&:hover': {
+                    borderColor: '#fff',
+                    backgroundColor: 'rgba(255,255,255,0.06)',
+                  },
                 }}
               >
                 Telegram
               </Button>
+
+              {/* Подписка / Поддержка → редирект в t.me/vitedanceapp */}
+
             </Stack>
           </Paper>
 
           <Typography sx={{ mt: 2, opacity: 0.7, fontSize: 12 }}>
-            *Приложение для андроид находится в разработке.
+            *Приложение для iOS и Android находится в разработке.
           </Typography>
         </Container>
       </Box>
