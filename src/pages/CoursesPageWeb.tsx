@@ -201,11 +201,13 @@ export default function CoursePageWeb() {
         const usnap = await getDoc(uref);
         const profile = usnap.exists() ? (usnap.data() as any) : {};
         const ac = profile?.availableCourses;
-
-        const byAll = ac === 'all';
+        
+        // было: const byAll = ac === 'all';
+        const byAll = Array.isArray(ac) && ac.includes('all');
+        
         const byArray =
           Array.isArray(ac) && (found.simpId ? ac.includes(found.simpId) : false);
-
+        
         setHaveAccess(!!(byAll || byArray));
       }
     } catch (e: any) {
