@@ -17,6 +17,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import logo from '../assets/vite-dance-logo.png'; // <-- добавь файл сюда
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded';
+import InstagramIcon from '@mui/icons-material/Instagram';
 
 const ORANGE = '#E86635';
 
@@ -146,6 +147,28 @@ export default function LinksPage() {
               >
                 Сайт
               </Button>
+              <Button
+              fullWidth
+              size="large"
+              startIcon={<InstagramIcon />}
+              href="https://instagram.com/vite.dance"
+              target="_blank"
+              rel="noopener"
+              variant="outlined"
+              sx={{
+                py: 1.2,
+                borderColor: 'rgba(255,255,255,0.5)',
+                color: '#fff',
+                fontWeight: 800,
+                '&:hover': {
+                  borderColor: '#fff',
+                  backgroundColor: 'rgba(255,255,255,0.06)',
+                },
+              }}
+            >
+              Instagram
+            </Button>
+
 
               {/* Скрыли iOS App */}
               {/*
