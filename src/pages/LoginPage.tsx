@@ -40,7 +40,7 @@ import {
         return e?.message || 'Не удалось войти. Попробуйте ещё раз.';
     }
   }
-  
+
   export default function LoginPageWeb({ onLogin, onForgotPassword }: Props) {
     const navigate = useNavigate();
     const { login, resetPassword } = useAuth();
@@ -171,6 +171,24 @@ import {
               >
                 {loading ? 'Входим…' : 'Войти'}
               </Button>
+
+              <Button
+                component={RouterLink}
+                to="/"
+                fullWidth
+                size="large"
+                variant="outlined"
+                sx={{
+                  mt: 1.5,
+                  py: 1.4,
+                  borderRadius: 999,
+                  borderColor: '#E86635',
+                  color: '#E86635',
+                  fontWeight: 800,
+                }}
+              >
+                Продолжить без регистрации
+              </Button>
             </Box>
   
             <Typography align="center" sx={{ mt: 3, color: 'text.secondary', fontSize: 16 }}>
@@ -184,4 +202,3 @@ import {
       </Box>
     );
   }
-  

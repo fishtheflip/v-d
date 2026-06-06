@@ -5,11 +5,10 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import PlayCircleOutlineRoundedIcon from '@mui/icons-material/PlayCircleOutlineRounded';
 import EditNoteRoundedIcon from '@mui/icons-material/EditNoteRounded';
 import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded';
-import DiamondRoundedIcon from '@mui/icons-material/DiamondRounded';
 import React from 'react'; 
+import { useAuth } from '../auth/AuthProvider';
+
 const ORANGE   = '#F97316';
-const EMERALD  = '#10B981'; // выбранный Премиум
-const EMERALD_BASE = '#059669'; // базовый (невыбранный) Премиум
 const BASE_ICON = '#334155';    // базовый цвет остальных иконок (вместо серого)
 
 type Tab = {
@@ -24,9 +23,7 @@ const tabs: Tab[] = [
   { label: 'Главная', icon: <HomeRoundedIcon />, path: '/',        baseColor: BASE_ICON },
   { label: 'Видео',   icon: <PlayCircleOutlineRoundedIcon />, path: '/videos', baseColor: BASE_ICON },
   { label: 'Авторы',  icon: <EditNoteRoundedIcon />, path: '/notes',  baseColor: BASE_ICON },
-  // Премиум — заметный базовый зелёный и яркий выбранный
   { label: 'Профиль', icon: <PersonOutlineRoundedIcon />, path: '/profile', baseColor: BASE_ICON },
-  { label: 'Премиум', icon: <DiamondRoundedIcon />, path: '/premium', baseColor: EMERALD_BASE, selectedColor: EMERALD },
 ];
 
 const HIDE_NAV_ON = [
@@ -37,6 +34,7 @@ const HIDE_NAV_ON = [
 export default function AppShell() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const hideNav = HIDE_NAV_ON.some((p) => matchPath(p, location.pathname));
   const value = Math.max(0, tabs.findIndex((t) => t.path === location.pathname));
@@ -48,7 +46,10 @@ export default function AppShell() {
           <BottomNavigation
             showLabels
             value={value}
-            onChange={(_, v) => navigate(tabs[v].path)}
+            onChange={(_, v) => {
+              const path = tabs[v].path;
+              navigate(path === '/profile' && !user ? '/register' : path);
+            }}
           >
             {tabs.map((t) => (
               <BottomNavigationAction

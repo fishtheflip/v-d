@@ -11,7 +11,6 @@ import {
   Divider,
 } from '@mui/material';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
-import HowToRegRoundedIcon from '@mui/icons-material/HowToRegRounded';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import { Link as RouterLink } from 'react-router-dom';
 import heroImg from '../assets/onboarding3.jpg';
@@ -33,8 +32,8 @@ export default function LandingPage() {
           <Typography sx={{ fontWeight: 900, letterSpacing: 0.2 }}>Vite Dance</Typography>
           <Box sx={{ flex: 1 }} />
           <Stack direction="row" spacing={1}>
-            <Button component={RouterLink} to="/login" color="inherit">
-              Войти
+            <Button component={RouterLink} to="/" color="inherit">
+              Смотреть видео
             </Button>
             <Button
               component={RouterLink}
@@ -105,9 +104,9 @@ export default function LandingPage() {
           >
             <Button
               component={RouterLink}
-              to="/register"
+              to="/"
               size="large"
-              startIcon={<HowToRegRoundedIcon />}
+              startIcon={<PlayArrowRoundedIcon />}
               sx={{
                 px: 3,
                 py: 1.2,
@@ -117,7 +116,7 @@ export default function LandingPage() {
               }}
               variant="contained"
             >
-              Начать бесплатно
+              Смотреть без регистрации
             </Button>
             <Button
               component={RouterLink}
@@ -184,12 +183,12 @@ export default function LandingPage() {
             Готов присоединиться?
           </Typography>
           <Typography sx={{ opacity: 0.9, mb: 2 }}>
-            Создай аккаунт за минуту и получи доступ к первым занятиям.
+            Все занятия доступны сразу. Регистрация не обязательна.
           </Typography>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} justifyContent="center">
             <Button
               component={RouterLink}
-              to="/register"
+              to="/"
               size="large"
               sx={{
                 px: 3,
@@ -201,7 +200,7 @@ export default function LandingPage() {
               }}
               variant="contained"
             >
-              Регистрация
+              Смотреть все видео
             </Button>
             <Button
               component={RouterLink}

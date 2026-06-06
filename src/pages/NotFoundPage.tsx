@@ -90,7 +90,7 @@ export default function NotFoundPageWeb() {
 
               <Button
                 variant="outlined"
-                onClick={() => navigate('/videos')}
+                onClick={() => navigate('/')}
                 startIcon={<PlayCircleOutlineRoundedIcon />}
                 sx={{
                   textTransform: 'none',

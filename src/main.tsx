@@ -18,7 +18,6 @@ import AuthorPageWeb from './pages/AuthorPage';
 import MyWorkoutsWeb from './pages/MyCourses'
 import CertificatesPageWeb from './pages/CertificatePage'
 import SupportPageWeb from './pages/SupportPageWeb';
-import PremiumPageWeb from './pages/PremiumPageWeb';
 import NotFoundPageWeb from './pages/NotFoundPage';
 import VimeoPlayer from './pages/VimeoPlayer'
 import LinksPage from './pages/LinksPage'
@@ -31,7 +30,7 @@ function ProtectedRoute() {
 
   return user
     ? <Outlet />
-    : <Navigate to="/landing" replace state={{ from: loc.pathname }} />;
+    : <Navigate to={loc.pathname === '/profile' ? '/register' : '/landing'} replace state={{ from: loc.pathname }} />;
 }
 
 createRoot(document.getElementById('root')!).render(
@@ -40,22 +39,22 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         {/* Общий layout */}
         <Route element={<AppShell />}>
-          {/* Защищённые страницы */}
+          {/* Публичный каталог и все видео */}
+          <Route path="/" element={<HomePageWeb />} />
+          <Route path="/videos" element={<VideosPageWeb />} />
+          <Route path="/notes" element={<NotesPageWeb />} />
+          <Route path="/author/:authorSlug" element={<AuthorPageWeb />} />
+          <Route path="/course/:simpId" element={<CoursePageWeb />} />
+          <Route path="/course" element={<CoursePageWeb />} />
+          <Route path="/support" element={<SupportPageWeb />} />
+          <Route path="/video" element={<VimeoPlayer />} />
+          <Route path="/video/:id" element={<VimeoPlayer />} />
+
+          {/* Персональные страницы требуют аккаунт */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<HomePageWeb />} />
-            <Route path="/videos" element={<VideosPageWeb />} />
-            <Route path="/notes" element={<NotesPageWeb />} />
             <Route path="/profile" element={<ProfilePageWeb />} />
-            <Route path="/author/:authorSlug" element={<AuthorPageWeb />} />
-            <Route path="/course/:simpId" element={<CoursePageWeb />} />
-            <Route path="/course" element={<CoursePageWeb />} />
             <Route path="/my-course" element={<MyWorkoutsWeb />} />
             <Route path="/my-cert" element={<CertificatesPageWeb />} />
-            <Route path="/support" element={<SupportPageWeb />} />
-            <Route path="/premium" element={<PremiumPageWeb />} />
-            <Route path="/video" element={<VimeoPlayer />} />
-            <Route path="/video/:id" element={<VimeoPlayer />} />
-            <Route path="*" element={<NotFoundPageWeb />} />
           </Route>
 
           {/* Публичные страницы */}
@@ -63,10 +62,10 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/landing" element={<LandingPage />} />
           <Route path="/links" element={<LinksPage />} />
+          <Route path="*" element={<NotFoundPageWeb />} />
 
           
           {/* Fallback */}
-          <Route path="*" element={<Navigate to="/landing" replace />} />
         </Route>
       </Routes>
     </BrowserRouter>

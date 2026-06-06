@@ -71,3 +71,5 @@ export default defineConfig([
   },
 ])
 
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="
+" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="2 алтынай choreo"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>

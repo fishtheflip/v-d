@@ -16,9 +16,8 @@ import WhatshotRoundedIcon from '@mui/icons-material/WhatshotRounded';
 import BoltRoundedIcon from '@mui/icons-material/BoltRounded';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import { useAuth } from '../auth/AuthProvider';
 import { db } from '../lib/firebase';
-import { collection, doc, getDoc, getDocs, query, where, limit } from 'firebase/firestore';
+import { collection, getDocs, query, where, limit } from 'firebase/firestore';
 
 const ORANGE = '#F25D29';
 const ORANGE_DARK = '#D94F22';
@@ -129,7 +128,6 @@ async function getVimeoThumbnailByAny(lesson: Lesson): Promise<string | null> {
 
 export default function CoursePageWeb() {
   const nav = useNavigate();
-  const { user } = useAuth();
   const location = useLocation();
   const params = useParams();
 
@@ -142,7 +140,7 @@ export default function CoursePageWeb() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState<string | null>(null);
   const [toastOpen, setToastOpen] = useState(false);
-  const [haveAccess, setHaveAccess] = useState(false);
+  const haveAccess = true;
 
   const [coverUrl, setCoverUrl] = useState<string | null>(null);
   const [heroReady, setHeroReady] = useState(false);
@@ -193,23 +191,6 @@ export default function CoursePageWeb() {
       setCourse(found);
       setLessons(ls);
 
-      // === права доступа (как в RN) ===
-      if (!user?.uid) {
-        setHaveAccess(false);
-      } else {
-        const uref = doc(db, 'users', user.uid);
-        const usnap = await getDoc(uref);
-        const profile = usnap.exists() ? (usnap.data() as any) : {};
-        const ac = profile?.availableCourses;
-        
-        // было: const byAll = ac === 'all';
-        const byAll = Array.isArray(ac) && ac.includes('all');
-        
-        const byArray =
-          Array.isArray(ac) && (found.simpId ? ac.includes(found.simpId) : false);
-        
-        setHaveAccess(!!(byAll || byArray));
-      }
     } catch (e: any) {
       console.error(e);
       setErr(e?.message || (isChoreo ? 'Не удалось загрузить хореографию' : 'Не удалось загрузить курс'));
@@ -224,7 +205,7 @@ export default function CoursePageWeb() {
     (async () => { if (!unmounted) await loadCourse(); })();
     return () => { unmounted = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isChoreo, draftCourse?.authorTitle, draftCourse?.courseName, draftCourse?.simpId, params.id, params.simpId, user?.uid]);
+  }, [isChoreo, draftCourse?.authorTitle, draftCourse?.courseName, draftCourse?.simpId, params.id, params.simpId]);
 
   // выбор обложки (как раньше)
   useEffect(() => {
@@ -429,19 +410,7 @@ export default function CoursePageWeb() {
 
             {/* CTA */}
             <Stack direction="row" spacing={1.5} sx={{ mt: 2 }}>
-              {!haveAccess && (
-                <Button
-                  variant="contained"
-                  onClick={() => nav('/premium')}
-                  sx={{
-                    borderRadius: 999, px: 2.5, py: 1.2, fontWeight: 800,
-                    bgcolor: ORANGE, '&:hover': { bgcolor: ORANGE_DARK }
-                  }}
-                >
-                  Получить доступ
-                </Button>
-              )}
-              {!!haveAccess && firstOpenIndex >= 0 && (
+              {firstOpenIndex >= 0 && (
                 <Button
                   variant="contained"
                   onClick={() => openLesson(lessons[firstOpenIndex])}
