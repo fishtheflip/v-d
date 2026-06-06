@@ -27,7 +27,7 @@ const tabs: Tab[] = [
 ];
 
 const HIDE_NAV_ON = [
-  '/login', '/register', '/forgot-password', '/landing',
+  '/forgot-password', '/landing',
   '/my-course', '/my-cert', '/support', '/links'
 ];
 
@@ -37,7 +37,10 @@ export default function AppShell() {
   const { user } = useAuth();
 
   const hideNav = HIDE_NAV_ON.some((p) => matchPath(p, location.pathname));
-  const value = Math.max(0, tabs.findIndex((t) => t.path === location.pathname));
+  const authPage = location.pathname === '/login' || location.pathname === '/register';
+  const value = authPage
+    ? tabs.findIndex((t) => t.path === '/profile')
+    : Math.max(0, tabs.findIndex((t) => t.path === location.pathname));
 
   return (
     <>

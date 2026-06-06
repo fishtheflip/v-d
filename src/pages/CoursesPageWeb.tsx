@@ -16,6 +16,7 @@ import WhatshotRoundedIcon from '@mui/icons-material/WhatshotRounded';
 import BoltRoundedIcon from '@mui/icons-material/BoltRounded';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
+import { useAuth } from '../auth/AuthProvider';
 import { db } from '../lib/firebase';
 import { collection, getDocs, query, where, limit } from 'firebase/firestore';
 
@@ -128,6 +129,7 @@ async function getVimeoThumbnailByAny(lesson: Lesson): Promise<string | null> {
 
 export default function CoursePageWeb() {
   const nav = useNavigate();
+  const { user } = useAuth();
   const location = useLocation();
   const params = useParams();
 
@@ -140,7 +142,7 @@ export default function CoursePageWeb() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState<string | null>(null);
   const [toastOpen, setToastOpen] = useState(false);
-  const haveAccess = true;
+  const haveAccess = !!user;
 
   const [coverUrl, setCoverUrl] = useState<string | null>(null);
   const [heroReady, setHeroReady] = useState(false);
@@ -440,8 +442,7 @@ export default function CoursePageWeb() {
                   return (
                     <Box key={`${l.name}-${i}`}>
                       <ListItemButton
-                        onClick={() => open && openLesson(l)}
-                        disabled={!open}
+                        onClick={() => open ? openLesson(l) : nav('/register')}
                         sx={{
                           borderRadius: 2,
                           py: 1.25,
@@ -460,7 +461,7 @@ export default function CoursePageWeb() {
 
                         <ListItemText
                           primary={l.name}
-                          secondary={l.duration ? `${l.duration}` : undefined}
+                          secondary={open ? (l.duration ? `${l.duration}` : undefined) : 'Доступно после регистрации'}
                           primaryTypographyProps={{ fontWeight: 800 }}
                           sx={{ ml: 1.25, mr: 1.25 }}
                         />

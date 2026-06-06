@@ -18,10 +18,12 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import heroImg from '../assets/banner.png';
 
-type Category = { id: string; name: string; icon?: string };
+type Category = { id: string; name: string; title?: string; icon?: string };
 type Course = {
   id: string;
   courseName: string;
+  title?: string;
+  simpId?: string;
   authorTitle?: string;
   seasonNum?: number;
   imgUrl?: string;
@@ -128,8 +130,28 @@ export default function HomePageWeb() {
 
   // 👉 переход к курсу
   const openCourse = (c: Course) => {
-    const slug = c.id; // если будет simpId — подставим его здесь
+    const slug = c.simpId || c.id;
     navigate(`/course/${slug}`, { state: c });
+  };
+
+  const openCategory = async (category: Category) => {
+    try {
+      const categoryTitle = (category.title || category.name).trim().toLocaleLowerCase();
+      const snap = await getDocs(collection(db, 'courses'));
+      const courses = snap.docs.map((d) => ({ id: d.id, ...(d.data() as any) })) as Course[];
+      const course = courses.find((item) =>
+        (item.courseName || item.title || '').trim().toLocaleLowerCase() === categoryTitle
+      );
+
+      if (!course) {
+        throw new Error(`Курс «${category.title || category.name}» не найден`);
+      }
+
+      openCourse(course);
+    } catch (e: any) {
+      setError(e?.message || 'Не удалось открыть курс');
+      setToastOpen(true);
+    }
   };
 
   // 👉 переход к хореографии (как openCourse, но с другим payload)
@@ -317,6 +339,7 @@ export default function HomePageWeb() {
                   </Stack>
                 }
                 clickable
+                onClick={() => openCategory(c)}
                 disabled={loading && !categories.length}
                 sx={{
                   flex: '0 0 auto',
