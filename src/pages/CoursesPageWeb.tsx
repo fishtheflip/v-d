@@ -2,13 +2,14 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
   Box, Container, Paper, Typography, IconButton, Stack, Chip,
-  List, ListItemButton, ListItemAvatar, Avatar, ListItemText, Divider,
+  List, ListItemButton, ListItemAvatar, ListItemText, Divider,
   CircularProgress, Button, Snackbar, Collapse, Skeleton,
 } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
+import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import LockRoundedIcon from '@mui/icons-material/LockRounded';
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
@@ -453,13 +454,24 @@ export default function CoursePageWeb() {
                         }}
                       >
                         <ListItemAvatar sx={{ minWidth: 64 }}>
-                          <Avatar
-                            variant="rounded"
-                            src={l.thumbUrl}
-                            sx={{ width: 56, height: 56, borderRadius: 2 }}
+                          <Box
+                            sx={{
+                              width: 56,
+                              height: 56,
+                              borderRadius: 2.5,
+                              display: 'grid',
+                              placeItems: 'center',
+                              color: open ? '#fff' : '#C46A16',
+                              background: open
+                                ? `linear-gradient(145deg, ${ORANGE}, #FF9A62)`
+                                : 'linear-gradient(145deg, #FFE1B8, #FFF5E6)',
+                              boxShadow: open
+                                ? '0 8px 20px rgba(242,93,41,0.22)'
+                                : '0 6px 16px rgba(196,106,22,0.12), inset 0 0 0 1px rgba(196,106,22,0.12)',
+                            }}
                           >
-                            {open ? <PlayArrowRoundedIcon /> : <LockRoundedIcon />}
-                          </Avatar>
+                            <AutoAwesomeRoundedIcon sx={{ fontSize: 27 }} />
+                          </Box>
                         </ListItemAvatar>
 
                         <ListItemText
