@@ -4,7 +4,6 @@ import {
   Paper,
   Chip,
   Stack,
-  Avatar,
   Typography,
   ButtonBase,
   Snackbar,
@@ -17,6 +16,7 @@ import { db } from '../lib/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import type { DocumentData, QueryDocumentSnapshot } from 'firebase/firestore';
+import ImageWithSkeleton from '../components/ImageWithSkeleton';
 type Teacher = {
   id: string;
   name: string;
@@ -209,13 +209,14 @@ export default function NotesPageWeb() {
                     '&:hover': { bgcolor: 'rgba(0,0,0,0.02)' },
                   }}
                 >
-                  <Avatar
+                  <ImageWithSkeleton
                     alt={t.name}
                     src={t.imgurl || t.photo}
                     sx={{
                       width: { xs: 140, md: 160 },
                       height: { xs: 140, md: 160 },
                       mb: 1.25,
+                      borderRadius: '50%',
                     }}
                   />
                   <Typography

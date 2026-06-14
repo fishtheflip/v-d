@@ -72,7 +72,6 @@ export default function VideoPageWeb() {
 
   // Принимаем данные из state, либо соберём из query/params при необходимости
   const courseItem = state ?? {};
-  console.log('CCC', courseItem)
   function cleanUndefinedLine(str?: string): string {
     if (!str) return '';
     return str

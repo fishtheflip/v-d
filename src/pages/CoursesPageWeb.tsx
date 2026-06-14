@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import {
   Box, Container, Paper, Typography, IconButton, Stack, Chip,
   List, ListItemButton, ListItemAvatar, Avatar, ListItemText, Divider,
-  CircularProgress, Button, Snackbar, Collapse,
+  CircularProgress, Button, Snackbar, Collapse, Skeleton,
 } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
@@ -309,20 +309,14 @@ export default function CoursePageWeb() {
                 opacity: loading ? 0.85 : 1,
               }}
             >
-              {/* Плейсхолдер (до загрузки основного изображения) */}
+              {/* Скелетон до загрузки основной обложки */}
               {(!heroSrc || !heroReady) && (
-                <Box
-                  component="img"
-                  src={`${import.meta.env.BASE_URL}assets/feature.png`}
-                  alt={`${title} (placeholder)`}
+                <Skeleton
+                  variant="rectangular"
+                  animation="wave"
                   sx={{
                     position: 'absolute', inset: 0,
                     width: '100%', height: '100%',
-                    objectFit: 'cover',
-                    // слегка поднять кадр, чтобы центр не резал головы
-                    objectPosition: { xs: '50% 30%', md: '50% 35%' },
-                    display: 'block',
-                    transform: 'translateZ(0)',   // сглаживает субпиксельные «ступеньки»
                   }}
                 />
               )}
@@ -362,12 +356,14 @@ export default function CoursePageWeb() {
               >
                 <ArrowBackIosNewRoundedIcon />
               </IconButton>
-              <IconButton
-                onClick={() => setFav(v => !v)}
-                sx={{ bgcolor: 'rgba(255,255,255,0.7)', '&:hover': { bgcolor: 'rgba(255,255,255,0.9)' }, pointerEvents: 'auto' }}
-              >
-                {fav ? <FavoriteRoundedIcon color="error" /> : <FavoriteBorderOutlinedIcon />}
-              </IconButton>
+              {user && (
+                <IconButton
+                  onClick={() => setFav(v => !v)}
+                  sx={{ bgcolor: 'rgba(255,255,255,0.7)', '&:hover': { bgcolor: 'rgba(255,255,255,0.9)' }, pointerEvents: 'auto' }}
+                >
+                  {fav ? <FavoriteRoundedIcon color="error" /> : <FavoriteBorderOutlinedIcon />}
+                </IconButton>
+              )}
             </Box>
           </Box>
 
@@ -442,7 +438,14 @@ export default function CoursePageWeb() {
                   return (
                     <Box key={`${l.name}-${i}`}>
                       <ListItemButton
-                        onClick={() => open ? openLesson(l) : nav('/register')}
+                        onClick={() => open
+                          ? openLesson(l)
+                          : course && nav('/register', {
+                              state: {
+                                returnTo: '/video',
+                                returnState: buildVideoState(course, l),
+                              },
+                            })}
                         sx={{
                           borderRadius: 2,
                           py: 1.25,

@@ -1,7 +1,7 @@
 // src/pages/HomePageWeb.tsx
 import {
   Box, Container, Typography, Stack, Chip, Button,
-  Card, CardActionArea, CardMedia, CardContent,
+  Card, CardActionArea, CardContent,
   IconButton, Paper, Divider, ListItemButton, ListItemText, ListItemAvatar, Avatar,
   Tooltip, useMediaQuery, Snackbar, Alert as MUIAlert, Collapse,
 } from '@mui/material';
@@ -14,9 +14,11 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useAuth } from '../auth/AuthProvider';
 import { db } from '../lib/firebase';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import heroImg from '../assets/banner.png';
+import { getCachedChoreos, getCachedCourses, loadChoreos, loadCourses } from '../lib/catalogCache';
+import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
 type Category = { id: string; name: string; title?: string; icon?: string };
 type Course = {
@@ -112,6 +114,7 @@ export default function HomePageWeb() {
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [popular, setPopular] = useState<Course[]>([]);
+  const [courses, setCourses] = useState<Course[]>([]);
   const [choreos, setChoreos] = useState<Choreo[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -134,11 +137,9 @@ export default function HomePageWeb() {
     navigate(`/course/${slug}`, { state: c });
   };
 
-  const openCategory = async (category: Category) => {
+  const openCategory = (category: Category) => {
     try {
       const categoryTitle = (category.title || category.name).trim().toLocaleLowerCase();
-      const snap = await getDocs(collection(db, 'courses'));
-      const courses = snap.docs.map((d) => ({ id: d.id, ...(d.data() as any) })) as Course[];
       const course = courses.find((item) =>
         (item.courseName || item.title || '').trim().toLocaleLowerCase() === categoryTitle
       );
@@ -177,22 +178,8 @@ export default function HomePageWeb() {
       return addIcons(rows);
     });
 
-  const fetchChoreos = async () =>
-    cachedFetch<Choreo[]>('choreos', async () => {
-      const snap = await getDocs(collection(db, 'choreos'));
-      return snap.docs.map((d) => {
-        const raw = d.data() as any;
-        return { id: d.id, name: raw?.name || '', ...raw } as Choreo;
-      });
-    });
-
-  const fetchPopular = async () =>
-    cachedFetch<Course[]>('courses_popular', async () => {
-      const q = query(collection(db, 'courses'), where('popular', '==', true));
-      const snap = await getDocs(q);
-      const rows = snap.docs.map((d) => ({ id: d.id, ...(d.data() as any) })) as Course[];
-      return rows.sort((a, b) => (Number(a.popPriority) || 0) - (Number(b.popPriority) || 0));
-    });
+  const fetchCourses = async () => loadCourses() as Promise<Course[]>;
+  const fetchChoreos = async () => loadChoreos() as Promise<Choreo[]>;
 
   // 👇 Загрузка
   const loadData = async () => {
@@ -202,17 +189,25 @@ export default function HomePageWeb() {
 
       // подставим кэш, если есть
       const cachedCat = getFromCache<Category[]>('categories');
-      const cachedCh = getFromCache<Choreo[]>('choreos');
-      const cachedPop = getFromCache<Course[]>('courses_popular');
+      const cachedCh = getCachedChoreos() as Choreo[] | null;
+      const cachedCourses = getCachedCourses() as Course[] | null;
       if (cachedCat) setCategories(cachedCat);
       if (cachedCh) setChoreos(cachedCh);
-      if (cachedPop) setPopular(cachedPop);
+      if (cachedCourses) {
+        setCourses(cachedCourses);
+        setPopular(cachedCourses.filter((course) => course.popular));
+      }
 
       // подтянем свежие данные (dedupe)
-      const [cat, ch, pop] = await Promise.all([fetchCategories(), fetchChoreos(), fetchPopular()]);
+      const [cat, ch, allCourses] = await Promise.all([
+        fetchCategories(),
+        fetchChoreos(),
+        fetchCourses(),
+      ]);
       setCategories(cat);
       setChoreos(ch);
-      setPopular(pop);
+      setCourses(allCourses);
+      setPopular(allCourses.filter((course) => course.popular));
     } catch (e: any) {
       console.error('Ошибка загрузки данных:', e);
       setError(e?.message || 'Не удалось загрузить данные. Попробуйте ещё раз.');
@@ -235,7 +230,6 @@ export default function HomePageWeb() {
 
   const hello = useMemo(() => {
     const name = user?.displayName?.trim();
-    console.log('USER', user)
     if (!name) return undefined;
     return (name === 'Адеми' || name === 'айым')
       ? `Bonjour 😘 ${name}`
@@ -386,9 +380,8 @@ export default function HomePageWeb() {
                   }}
                 >
                   <CardActionArea onClick={() => openCourse(c)} sx={{ borderRadius: 3 }}>
-                    <CardMedia
-                      component="img"
-                      image={
+                    <ImageWithSkeleton
+                      src={
                         c.imgUrl ||
                         'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200&auto=format&fit=crop'
                       }
@@ -396,10 +389,8 @@ export default function HomePageWeb() {
                       sx={{
                         width: '100%',
                         height: { xs: 160, sm: 180, md: 200 },
-                        objectFit: 'cover',
                         borderTopLeftRadius: 12,
                         borderTopRightRadius: 12,
-                        display: 'block',
                       }}
                     />
                     <CardContent sx={{ px: { xs: 1, sm: 1.5 }, py: { xs: 1, sm: 1.5 } }}>

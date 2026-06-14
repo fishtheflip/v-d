@@ -14,7 +14,7 @@ import {
   import VisibilityOff from '@mui/icons-material/VisibilityOff';
   import Visibility from '@mui/icons-material/Visibility';
   import { useState } from 'react';
-  import { Link as RouterLink, useNavigate } from 'react-router-dom';
+  import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
   import { useAuth } from '../auth/AuthProvider'; // проверь путь-алиас
   
   type Props = {
@@ -37,10 +37,12 @@ import {
         return e?.message || 'Не удалось создать аккаунт. Попробуйте ещё раз.';
     }
   }
-  
+
   export default function RegisterPage({ offline, onRegister }: Props) {
     const nav = useNavigate();
+    const location = useLocation();
     const { register } = useAuth();
+    const returnTarget = location.state as { returnTo?: string; returnState?: unknown } | null;
   
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -85,7 +87,10 @@ import {
           await register(payload.email, payload.password, payload.name, payload.phone);
         }
   
-        nav('/', { replace: true });
+        nav(returnTarget?.returnTo || '/', {
+          replace: true,
+          state: returnTarget?.returnState,
+        });
       } catch (error: any) {
         setErr(mapRegisterError(error));
       } finally {
@@ -202,4 +207,3 @@ import {
       </Box>
     );
   }
-  

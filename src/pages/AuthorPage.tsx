@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
   Box, Container, Typography, Stack, Button, Chip,
-  Card, CardActionArea, CardMedia, CardContent,
+  Card, CardActionArea, CardContent,
   Avatar, Paper, Divider, IconButton, Snackbar, Alert as MUIAlert, Collapse,
 } from '@mui/material';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
@@ -10,6 +10,7 @@ import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRound
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { db } from '../lib/firebase';
+import ImageWithSkeleton from '../components/ImageWithSkeleton';
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 
 type AuthorDoc = { id?: string; simpId?: string; name: string; about?: string; imgurl?: string; };
@@ -221,9 +222,8 @@ const AuthorPageWeb: React.FC = () => {
                         onClick={() => openCourse(c)}
                         sx={{ borderRadius: 3, overflow: 'visible' }}
                     >
-                        <CardMedia
-                        component="img"
-                        image={
+                        <ImageWithSkeleton
+                        src={
                             c.imgUrl ||
                             'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200&auto=format&fit=crop'
                         }
@@ -231,10 +231,8 @@ const AuthorPageWeb: React.FC = () => {
                         sx={{
                             width: '100%',
                             aspectRatio: '16 / 9',
-                            objectFit: 'cover',
                             borderTopLeftRadius: 12,
                             borderTopRightRadius: 12,
-                            display: 'block',
                         }}
                         />
 

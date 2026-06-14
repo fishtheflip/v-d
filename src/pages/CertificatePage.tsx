@@ -6,7 +6,6 @@ import {
   Typography,
   Stack,
   Card,
-  CardMedia,
   CardContent,
   CardActions,
   Button,
@@ -20,6 +19,7 @@ import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
 import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { useNavigate } from 'react-router-dom';
+import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
 type Certificate = {
   id: string;
@@ -154,9 +154,8 @@ export default function CertificatesPageWeb() {
                         flexDirection: 'column',
                       }}
                     >
-                      <CardMedia
-                        component="img"
-                        image={
+                      <ImageWithSkeleton
+                        src={
                           c.previewUrl ||
                           'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?q=80&w=1200&auto=format&fit=crop'
                         }
@@ -164,7 +163,6 @@ export default function CertificatesPageWeb() {
                         sx={{
                           width: '100%',
                           aspectRatio: '16 / 9',
-                          objectFit: 'cover',
                           borderTopLeftRadius: 12,
                           borderTopRightRadius: 12,
                         }}

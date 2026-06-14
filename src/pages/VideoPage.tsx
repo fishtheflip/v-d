@@ -1,7 +1,7 @@
 // src/pages/VideosPageWeb.tsx
 import {
   Box, Container, Typography, Stack, IconButton,
-  Card, CardActionArea, CardMedia, CardContent, Button,
+  Card, CardActionArea, CardContent, Button,
   ToggleButton, ToggleButtonGroup, Snackbar, Alert as MUIAlert, Collapse,
   Chip, CircularProgress, // ← добавил
 } from '@mui/material';
@@ -10,9 +10,15 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import { useEffect, useMemo, useState } from 'react';
 
-import { db } from '../lib/firebase';
-import { collection, getDocs, query } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../auth/AuthProvider';
+import {
+  getCachedChoreos,
+  getCachedCourses,
+  loadChoreos,
+  loadCourses,
+} from '../lib/catalogCache';
+import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
 type TabKind = 'course' | 'choreo';
 
@@ -34,34 +40,6 @@ type Choreo = {
   simpId?: string;
 };
 
-// ====== КЭШ (TTL = 1 час) ======
-const TTL_MS = 1 * 60 * 1000; // 1 час
-const K_COURSES = 'videos:courses';
-const K_CHOREOS = 'videos:choreos';
-
-type CacheBox<T> = { ts: number; data: T };
-
-function readCache<T>(key: string): T | null {
-  try {
-    const raw = localStorage.getItem(key);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw) as CacheBox<T>;
-    if (!parsed || typeof parsed.ts !== 'number') return null;
-    if (Date.now() - parsed.ts > TTL_MS) return null;
-    return parsed.data;
-  } catch {
-    return null;
-  }
-}
-function writeCache<T>(key: string, data: T) {
-  try {
-    const box: CacheBox<T> = { ts: Date.now(), data };
-    localStorage.setItem(key, JSON.stringify(box));
-  } catch {
-    // игнорируем ошибки квоты
-  }
-}
-
 export default function VideosPageWeb() {
   const [tab, setTab] = useState<TabKind>('course');
 
@@ -75,6 +53,7 @@ export default function VideosPageWeb() {
   const [toastOpen, setToastOpen] = useState(false);
 
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const toggleLike = (id: string) => setLiked((s) => ({ ...s, [id]: !s[id] }));
 
@@ -86,8 +65,8 @@ export default function VideosPageWeb() {
       setError(null);
 
       // 1) Попробуем кэш (если не force)
-      let cachedCourses = !force ? readCache<Course[]>(K_COURSES) : null;
-      let cachedChoreos = !force ? readCache<Choreo[]>(K_CHOREOS) : null;
+      const cachedCourses = !force ? getCachedCourses() as Course[] | null : null;
+      const cachedChoreos = !force ? getCachedChoreos() as Choreo[] | null : null;
 
       if (cachedCourses && cachedChoreos) {
         setCourses(cachedCourses);
@@ -96,34 +75,14 @@ export default function VideosPageWeb() {
         return;
       }
 
-      // 2) Иначе тянем из Firestore
-      const [snapCourses, snapChoreos] = await Promise.all([
-        getDocs(query(collection(db, 'courses'))),
-        getDocs(query(collection(db, 'choreos'))),
+      const [sortedCourses, rawChoreos] = await Promise.all([
+        loadCourses(force) as Promise<Course[]>,
+        loadChoreos(force) as Promise<Choreo[]>,
       ]);
-
-      const rawCourses = snapCourses.docs.map((d) => ({ id: d.id, ...(d.data() as any) })) as Course[];
-      const sortedCourses = rawCourses.sort(
-        (a, b) => (Number(a.popPriority) || 0) - (Number(b.popPriority) || 0)
-      );
-
-      const rawChoreos = snapChoreos.docs.map((d) => {
-        const r = d.data() as any;
-        return {
-          id: d.id,
-          name: r?.name || '',
-          Author: r?.Author,
-          imgUrl: r?.imgUrl,
-          simpId: r?.simpId,
-        } as Choreo;
-      });
 
       setCourses(sortedCourses);
       setChoreos(rawChoreos);
 
-      // 3) Обновим кэш
-      writeCache(K_COURSES, sortedCourses);
-      writeCache(K_CHOREOS, rawChoreos);
     } catch (e: any) {
       console.error('Ошибка загрузки видео:', e);
       setError(e?.message || 'Не удалось загрузить данные. Попробуйте ещё раз.');
@@ -251,29 +210,28 @@ export default function VideosPageWeb() {
                     }}
                   >
                     <Box sx={{ position: 'relative' }}>
-                      <CardMedia
-                        component="img"
-                        image={image}
+                      <ImageWithSkeleton
+                        src={image}
                         alt={title}
                         sx={{
                           width: '100%',
                           aspectRatio: '16 / 9',
-                          objectFit: 'cover',
                           borderTopLeftRadius: 12,
                           borderTopRightRadius: 12,
-                          display: 'block',
                         }}
                       />
-                      <IconButton
-                        onClick={(e) => { e.stopPropagation(); toggleLike(id); }}
-                        sx={{
-                          position: 'absolute', top: 8, right: 8,
-                          bgcolor: 'rgba(255,255,255,0.85)',
-                          '&:hover': { bgcolor: 'rgba(255,255,255,0.95)' }
-                        }}
-                      >
-                        {isLiked ? <FavoriteRoundedIcon color="error" /> : <FavoriteBorderOutlinedIcon />}
-                      </IconButton>
+                      {user && (
+                        <IconButton
+                          onClick={(e) => { e.stopPropagation(); toggleLike(id); }}
+                          sx={{
+                            position: 'absolute', top: 8, right: 8,
+                            bgcolor: 'rgba(255,255,255,0.85)',
+                            '&:hover': { bgcolor: 'rgba(255,255,255,0.95)' }
+                          }}
+                        >
+                          {isLiked ? <FavoriteRoundedIcon color="error" /> : <FavoriteBorderOutlinedIcon />}
+                        </IconButton>
+                      )}
                     </Box>
 
                     <CardActionArea
