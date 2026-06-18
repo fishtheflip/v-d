@@ -13,10 +13,10 @@ import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useAuth } from '../auth/AuthProvider';
-import { db } from '../lib/firebase';
+import { db } from '../lib/firestore';
 import { collection, getDocs } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import heroImg from '../assets/banner.png';
+import heroImg from '../assets/banner.webp';
 import { getCachedChoreos, getCachedCourses, loadChoreos, loadCourses } from '../lib/catalogCache';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
 

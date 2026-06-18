@@ -18,7 +18,7 @@ import BoltRoundedIcon from '@mui/icons-material/BoltRounded';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { useAuth } from '../auth/AuthProvider';
-import { db } from '../lib/firebase';
+import { db } from '../lib/firestore';
 import { collection, getDocs, query, where, limit } from 'firebase/firestore';
 
 const ORANGE = '#F25D29';

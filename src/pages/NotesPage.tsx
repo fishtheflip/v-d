@@ -12,7 +12,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { useEffect, useMemo, useState, useCallback } from 'react';
-import { db } from '../lib/firebase';
+import { db } from '../lib/firestore';
 import { collection, getDocs } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import type { DocumentData, QueryDocumentSnapshot } from 'firebase/firestore';

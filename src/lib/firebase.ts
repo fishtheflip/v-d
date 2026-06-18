@@ -6,7 +6,6 @@ import {
   setPersistence,
   browserLocalPersistence,
 } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDeK2bpq8HU8bGYLBf8fZyBJ3I8I5kuS28",
@@ -22,8 +21,6 @@ export const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 setPersistence(auth, browserLocalPersistence);
-
-export const db = getFirestore(app);
 
 // analytics в браузерах, где поддерживается
 // isSupported().then((ok) => {

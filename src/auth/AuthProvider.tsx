@@ -14,8 +14,7 @@ import {
     createUserWithEmailAndPassword,
     type User,
   } from 'firebase/auth';
-  import { auth, db } from '../lib/firebase';
-  import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+  import { auth } from '../lib/firebase';
   
   type AuthContextType = {
     user: User | null;
@@ -45,7 +44,7 @@ import {
       await setPersistence(auth, remember ? browserLocalPersistence : browserSessionPersistence);
       await signInWithEmailAndPassword(auth, email, password);
     };
-  
+
     const logout = () => signOut(auth);
   
     const resetPassword = (email: string) => sendPasswordResetEmail(auth, email);
@@ -57,6 +56,11 @@ import {
       if (displayName) {
         await updateProfile(cred.user, { displayName });
       }
+
+      const [{ db }, { doc, setDoc, serverTimestamp }] = await Promise.all([
+        import('../lib/firestore'),
+        import('firebase/firestore'),
+      ]);
   
       await setDoc(
         doc(db, 'users', cred.user.uid),
@@ -84,6 +88,12 @@ import {
     const updateDisplayName = async (displayName: string) => {
       if (!auth.currentUser) return;
       await updateProfile(auth.currentUser, { displayName });
+
+      const [{ db }, { doc, setDoc }] = await Promise.all([
+        import('../lib/firestore'),
+        import('firebase/firestore'),
+      ]);
+
       await setDoc(
         doc(db, 'users', auth.currentUser.uid),
         { displayName },
@@ -95,13 +105,12 @@ import {
       () => ({ user, loading, login, logout, resetPassword, register, updateDisplayName }),
       [user, loading]
     );
-  
+
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
   }
-  
+
   export const useAuth = () => {
     const ctx = useContext(AuthContext);
     if (!ctx) throw new Error('useAuth must be used within AuthProvider');
     return ctx;
   };
-  

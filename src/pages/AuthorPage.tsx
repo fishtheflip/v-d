@@ -9,7 +9,7 @@ import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { db } from '../lib/firebase';
+import { db } from '../lib/firestore';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 
