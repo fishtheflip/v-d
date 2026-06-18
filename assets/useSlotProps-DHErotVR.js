@@ -1,0 +1,1 @@
+import{r as s,A as f,D as P,h as i,F as x}from"./index-Bjp7c8L9.js";const S=s.createContext(),v=()=>s.useContext(S)??!1;function C(e){const{elementType:r,externalSlotProps:n,ownerState:o,skipResolvingSlotProps:p=!1,...a}=e,t=p?{}:f(n,o),{props:l,internalRef:c}=P({...a,externalSlotProps:t}),u=i(c,t?.ref,e.additionalProps?.ref);return x(r,{...l,ref:u},o)}export{C as a,v as u};
