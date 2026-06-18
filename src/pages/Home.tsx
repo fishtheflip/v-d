@@ -109,7 +109,7 @@ const addIcons = (items: Category[]): Category[] => {
 export default function HomePageWeb() {
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
 
   const [categories, setCategories] = useState<Category[]>([]);
@@ -183,6 +183,8 @@ export default function HomePageWeb() {
 
   // 👇 Загрузка
   const loadData = async () => {
+    if (authLoading) return;
+
     try {
       setLoading(true);
       setError(null);
@@ -198,16 +200,34 @@ export default function HomePageWeb() {
         setPopular(cachedCourses.filter((course) => course.popular));
       }
 
-      // подтянем свежие данные (dedupe)
-      const [cat, ch, allCourses] = await Promise.all([
+      // Подтягиваем блоки независимо: категории не должны пропадать,
+      // если курсы/хореографии временно не доступны после login/logout.
+      const [catResult, chResult, coursesResult] = await Promise.allSettled([
         fetchCategories(),
         fetchChoreos(),
         fetchCourses(),
       ]);
-      setCategories(cat);
-      setChoreos(ch);
-      setCourses(allCourses);
-      setPopular(allCourses.filter((course) => course.popular));
+
+      if (catResult.status === 'fulfilled') {
+        setCategories(catResult.value);
+      } else if (!cachedCat) {
+        throw catResult.reason;
+      }
+
+      if (chResult.status === 'fulfilled') {
+        setChoreos(chResult.value);
+      }
+
+      if (coursesResult.status === 'fulfilled') {
+        setCourses(coursesResult.value);
+        setPopular(coursesResult.value.filter((course) => course.popular));
+      }
+
+      const failedOptional = [chResult, coursesResult].some((result) => result.status === 'rejected');
+      if (failedOptional && !cachedCh && !cachedCourses) {
+        setError('Часть данных не загрузилась. Категории доступны, попробуйте обновить страницу.');
+        setToastOpen(true);
+      }
     } catch (e: any) {
       console.error('Ошибка загрузки данных:', e);
       setError(e?.message || 'Не удалось загрузить данные. Попробуйте ещё раз.');
@@ -226,7 +246,7 @@ export default function HomePageWeb() {
       unmounted = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [authLoading, user?.uid]);
 
   const hello = useMemo(() => {
     const name = user?.displayName?.trim();

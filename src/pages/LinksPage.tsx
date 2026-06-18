@@ -10,8 +10,7 @@ import {
   Paper,
 } from '@mui/material';
 import LanguageRoundedIcon from '@mui/icons-material/LanguageRounded';
-import TelegramIcon from '@mui/icons-material/Telegram';
-// import AppleIcon from '@mui/icons-material/Apple'; // скрыли iOS кнопку — импорт не нужен
+import AppleIcon from '@mui/icons-material/Apple';
 // import AndroidIcon from '@mui/icons-material/Android';
 import { Link as RouterLink } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -35,7 +34,7 @@ export default function LinksPage() {
       })();
     metaDesc.setAttribute(
       'content',
-      'Vite Dance — онлайн платформа по обучению танцев. Сайт, Telegram и ссылки на приложения iOS/Android.'
+      'Vite Dance — онлайн платформа по обучению танцев. Сайт, Instagram, поддержка и приложение для iOS.'
     );
   }, []);
 
@@ -148,35 +147,10 @@ export default function LinksPage() {
                 Сайт
               </Button>
               <Button
-              fullWidth
-              size="large"
-              startIcon={<InstagramIcon />}
-              href="https://instagram.com/vite.dance"
-              target="_blank"
-              rel="noopener"
-              variant="outlined"
-              sx={{
-                py: 1.2,
-                borderColor: 'rgba(255,255,255,0.5)',
-                color: '#fff',
-                fontWeight: 800,
-                '&:hover': {
-                  borderColor: '#fff',
-                  backgroundColor: 'rgba(255,255,255,0.06)',
-                },
-              }}
-            >
-              Instagram
-            </Button>
-
-
-              {/* Скрыли iOS App */}
-              {/*
-              <Button
                 fullWidth
                 size="large"
                 startIcon={<AppleIcon />}
-                href="https://apps.apple.com/app/idYOUR_APP_ID"
+                href="https://apps.apple.com/kz/app/vite-dance/id6752951088"
                 target="_blank"
                 rel="noopener"
                 variant="outlined"
@@ -188,15 +162,34 @@ export default function LinksPage() {
                   '&:hover': { borderColor: '#fff', backgroundColor: 'rgba(255,255,255,0.06)' },
                 }}
               >
-                iOS App
+                Приложение для iOS
               </Button>
-              */}
-
-              {/* Телеграм-канал / чат */}
               <Button
                 fullWidth
                 size="large"
-                startIcon={<ChatRoundedIcon />}  // ← новая иконка
+                startIcon={<InstagramIcon />}
+                href="https://instagram.com/vite.dance"
+                target="_blank"
+                rel="noopener"
+                variant="outlined"
+                sx={{
+                  py: 1.2,
+                  borderColor: 'rgba(255,255,255,0.5)',
+                  color: '#fff',
+                  fontWeight: 800,
+                  '&:hover': {
+                    borderColor: '#fff',
+                    backgroundColor: 'rgba(255,255,255,0.06)',
+                  },
+                }}
+              >
+                Instagram
+              </Button>
+
+              <Button
+                fullWidth
+                size="large"
+                startIcon={<ChatRoundedIcon />}
                 href="https://t.me/vitedanceapp"
                 target="_blank"
                 rel="noopener"
@@ -211,38 +204,14 @@ export default function LinksPage() {
                     backgroundColor: 'rgba(255,255,255,0.06)',
                   },
                 }}
->
+              >
                 Подписка / Поддержка
               </Button>
-              <Button
-                fullWidth
-                size="large"
-                startIcon={<TelegramIcon />}
-                href="https://t.me/vitedance"
-                target="_blank"
-                rel="noopener"
-                variant="outlined"
-                sx={{
-                  py: 1.2,
-                  borderColor: 'rgba(255,255,255,0.5)',
-                  color: '#fff',
-                  fontWeight: 800,
-                  '&:hover': {
-                    borderColor: '#fff',
-                    backgroundColor: 'rgba(255,255,255,0.06)',
-                  },
-                }}
-              >
-                Telegram
-              </Button>
-
-              {/* Подписка / Поддержка → редирект в t.me/vitedanceapp */}
-
             </Stack>
           </Paper>
 
           <Typography sx={{ mt: 2, opacity: 0.7, fontSize: 12 }}>
-            *Приложение для iOS и Android находится в разработке.
+            *Приложение для iOS уже доступно в App Store.
           </Typography>
         </Container>
       </Box>
