@@ -1,0 +1,1 @@
+import{initializeFirestore as t,persistentLocalCache as r,persistentMultipleTabManager as a}from"./vendor-firestore-BSyDl-8k.js";import{$ as e}from"./index-BwcYJ9V0.js";import"./vendor-firebase-core-CEwrQVc9.js";import"./vendor-react-CQO75SXR.js";import"./vendor-firebase-auth-BKqB1sZt.js";const l=t(e,{localCache:r({tabManager:a()})});export{l as db};
