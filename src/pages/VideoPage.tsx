@@ -1,7 +1,7 @@
 // src/pages/VideosPageWeb.tsx
 import {
   Box, Container, Typography, Stack, IconButton,
-  Card, CardActionArea, CardContent, Button,
+  Card, CardActionArea, CardContent,
   ToggleButton, ToggleButtonGroup, Snackbar, Alert as MUIAlert, Collapse,
   Chip, CircularProgress, // ← добавил
 } from '@mui/material';
@@ -274,10 +274,13 @@ export default function VideosPageWeb() {
                             </Typography>
                           </Stack>
 
-                          {/* Оранжевая кнопка «Смотреть» — адаптивная */}
-                          <Button
-                            size="small"
+                          {/* Визуальная кнопка внутри CardActionArea без вложенного <button>. */}
+                          <Box
+                            component="span"
                             sx={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
                               ml: 1,
                               flexShrink: 0,
                               borderRadius: 999,
@@ -298,7 +301,7 @@ export default function VideosPageWeb() {
                               Смотреть
                             </Box>
                             <PlayArrowRoundedIcon sx={{ ml: 0.5, display: { xs: 'none', sm: 'inline-flex' } }} />
-                          </Button>
+                          </Box>
                         </Stack>
                       </CardContent>
                     </CardActionArea>

@@ -254,12 +254,14 @@ const AuthorPageWeb: React.FC = () => {
                             )}
                         </Stack>
 
-                        {/* кнопка — отдельной строкой справа */}
+                        {/* Визуальная кнопка внутри CardActionArea без вложенного <button>. */}
                         <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
-                            <Button
-                            size="small"
-                            endIcon={<PlayArrowRoundedIcon />}
+                          <Box
+                            component="span"
                             sx={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: 0.5,
                                 borderRadius: 999,
                                 px: 1.75,
                                 py: 0.5,
@@ -271,9 +273,10 @@ const AuthorPageWeb: React.FC = () => {
                                 boxShadow: '0 6px 16px rgba(249,115,22,0.28)',
                                 minWidth: 0,
                             }}
-                            >
+                          >
                             Смотреть
-                            </Button>
+                            <PlayArrowRoundedIcon fontSize="small" />
+                          </Box>
                         </Box>
                         </CardContent>
                     </CardActionArea>

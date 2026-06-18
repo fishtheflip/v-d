@@ -13,7 +13,7 @@ import {
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import { Link as RouterLink } from 'react-router-dom';
-import heroImg from '../assets/onboarding3.jpg';
+import heroImg from '../assets/onboarding3.webp';
 
 const ORANGE = '#E86635';
 

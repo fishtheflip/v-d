@@ -39,7 +39,7 @@ type Choreo = { id: string; name: string; Author?: string; imgUrl?: string; simp
 // =====================
 type CacheEntry<T> = { data: T; ts: number };
 type InFlightMap = Record<string, Promise<any> | undefined>;
-const TTL_MS = 1 * 60 * 1000; // 1 час
+const TTL_MS = 60 * 60 * 1000; // 1 час
 const LS_PREFIX = 'home_cache:'; // префикс ключей в localStorage
 const memCache = new Map<string, CacheEntry<any>>();
 const inFlight: InFlightMap = {};
@@ -448,15 +448,13 @@ export default function HomePageWeb() {
                           )}
                         </Stack>
 
-                        {/* Оранжевая кнопка «Смотреть» */}
-                        <Button
-                          size="small"
-                          endIcon={<PlayArrowRoundedIcon />}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            openCourse(c);
-                          }}
+                        {/* Визуальная кнопка внутри CardActionArea без вложенного <button>. */}
+                        <Box
+                          component="span"
                           sx={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 0.5,
                             ml: 1,
                             flexShrink: 0,
                             borderRadius: 999,
@@ -471,7 +469,8 @@ export default function HomePageWeb() {
                           }}
                         >
                           Смотреть
-                        </Button>
+                          <PlayArrowRoundedIcon fontSize="small" />
+                        </Box>
                       </Stack>
                     </CardContent>
                   </CardActionArea>
