@@ -9,9 +9,8 @@ import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { db } from '../lib/firestore';
+import { findAuthor, courses as localCourses, choreos as localChoreos } from '../lib/localCatalog';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
-import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 
 type AuthorDoc = { id?: string; simpId?: string; name: string; about?: string; imgurl?: string; };
 type Course = { id: string; courseName: string; authorTitle?: string; seasonNum?: number; imgUrl?: string; simpId?: string; popPriority?: number; };
@@ -33,17 +32,9 @@ function useAuthorFromRoute(): { author: AuthorDoc | null; loading: boolean; err
       try {
         setLoading(true);
         setError(null);
-        const q1 = query(collection(db, 'authors'), where('simpId', '==', authorSlug));
-        const s1 = await getDocs(q1);
-        if (!cancelled && !s1.empty) {
-          const d = s1.docs[0];
-          setAuthor({ id: d.id, ...(d.data() as Omit<AuthorDoc, 'id'>) });
-          return;
-        }
-        const ref = doc(db, 'authors', authorSlug);
-        const snap = await getDoc(ref);
-        if (!cancelled && snap.exists()) {
-          setAuthor({ id: snap.id, ...(snap.data() as Omit<AuthorDoc, 'id'>) });
+        const found = findAuthor(authorSlug);
+        if (found) {
+          if (!cancelled) setAuthor(found);
           return;
         }
         if (!cancelled) setError('Автор не найден');
@@ -73,22 +64,18 @@ const AuthorPageWeb: React.FC = () => {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      if (!author?.name) return;
+      if (!author?.name) { setLoading(false); return; }
       try {
         setLoading(true);
         setError(null);
-        const qCourses = query(collection(db, 'courses'), where('authorTitle', '==', author.name));
-        const snapCourses = await getDocs(qCourses);
-        const cs = snapCourses.docs.map(d => ({ id: d.id, ...(d.data() as any) })) as Course[];
+        const cs = localCourses.filter(course => course.authorTitle === author.name);
         cs.sort((a, b) =>
           (Number(a.popPriority) || 0) - (Number(b.popPriority) || 0) ||
           (a.courseName || '').localeCompare(b.courseName || '')
         );
         if (!cancelled) setCourses(cs);
 
-        const qCh = query(collection(db, 'choreos'), where('authors', 'array-contains', author.name));
-        const snapCh = await getDocs(qCh);
-        const ch = snapCh.docs.map(d => ({ id: d.id, ...(d.data() as any) })) as Choreo[];
+        const ch = localChoreos.filter(item => item.authors?.includes(author.name));
         if (!cancelled) setChoreos(ch);
       } catch (e: any) {
         if (!cancelled) {
@@ -106,7 +93,7 @@ const AuthorPageWeb: React.FC = () => {
 
   const openCourse = (c: Course) => navigate(`/course/${c.simpId || c.id}`, { state: c });
   const openChoreo = (ch: Choreo) =>
-    navigate('/course', { state: { courseName: ch.name, imgUrl: ch.imgUrl, authorTitle: ch.Author, simpId: ch.simpId, from: 'choreo' } });
+    navigate('/course', { state: { id: ch.id, courseName: ch.name, imgUrl: ch.imgUrl, authorTitle: ch.Author, simpId: ch.simpId, from: 'choreo' } });
 
   const heroUrl = author?.imgurl || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1600&auto=format&fit=crop';
   const isBusy = authorLoading || loading;

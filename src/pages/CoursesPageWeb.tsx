@@ -18,8 +18,7 @@ import BoltRoundedIcon from '@mui/icons-material/BoltRounded';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { useAuth } from '../auth/AuthProvider';
-import { db } from '../lib/firestore';
-import { collection, getDocs, query, where, limit } from 'firebase/firestore';
+import { findCourse, courses, choreos } from '../lib/localCatalog';
 
 const ORANGE = '#F25D29';
 const ORANGE_DARK = '#D94F22';
@@ -32,6 +31,7 @@ type Lesson = {
   thumbUrl?: string;
   videoId?: string;
   vimeoId?: string;
+  videoProvider?: string;
   videoUrl?: string;
   url?: string;
   description?: string;
@@ -45,13 +45,14 @@ type Course = {
   Author?: string;       // на всякий — если документ в choreos хранит Author
   seasonNum?: number;
   sumDuration?: number | string;
-  sumLessons?: number;
+  sumLessons?: number | string;
   level?: string;
   imgUrl?: string;
   lessons?: Lesson[];
 };
 
-function pluralizeLessons(n?: number) {
+function pluralizeLessons(value?: number | string) {
+  const n = value == null ? undefined : Number(value);
   if (n == null || Number.isNaN(n)) return '';
   const mod10 = n % 10, mod100 = n % 100;
   if (mod10 === 1 && mod100 !== 11) return `${n} урок`;
@@ -64,6 +65,7 @@ function buildVideoState(course: Course, lesson: Lesson) {
     name: `${course.courseName} — ${lesson.name}`,
     description: lesson.description || course.authorTitle || course.Author || '',
     videoId: lesson.videoId || lesson.vimeoId,
+    videoProvider: lesson.videoProvider,
     videoUrl: lesson.videoUrl || lesson.url,
   };
 }
@@ -154,38 +156,11 @@ export default function CoursePageWeb() {
       setLoading(true);
       setErr(null);
 
-      const colName = isChoreo ? 'choreos' : 'courses';
-
-      let found: Course | null = null;
-
-      // 1) если есть simpId/id в URL — пробуем по simpId в своей коллекции
-      if (!isChoreo && (params?.id || params?.simpId)) {
-        const simpId = (params.id || params.simpId)!;
-        const qy = query(collection(db, 'courses'), where('simpId', '==', simpId), limit(1));
-        const snap = await getDocs(qy);
-        if (!snap.empty) {
-          const d = snap.docs[0];
-          found = { id: d.id, ...(d.data() as any) } as Course;
-        }
-      }
-
-      // 2) если нет — ищем по authorTitle в соответствующей коллекции (как RN)
-      if (draftCourse?.authorTitle?.includes('/')) {
-        const parts = draftCourse.authorTitle.split('/');
-        draftCourse.authorTitle = parts[1]?.trim() || draftCourse.authorTitle.trim();
-      }
-      if (!found && draftCourse?.authorTitle) {
-        const qy = query(collection(db, colName), where('authorTitle', '==', draftCourse.authorTitle), limit(1));
-        const snap = await getDocs(qy);
-        if (!snap.empty) {
-          const d = snap.docs[0];
-          found = { id: d.id, ...(d.data() as any) } as Course;
-        }
-      }
-
-      // 3) fallback — берём state как есть (например, пришли из списка хорео)
-      if (!found && draftCourse?.courseName) {
-        found = { id: draftCourse.id || 'draft', ...(draftCourse as any) } as Course;
+      const slug = params.id || params.simpId || draftCourse?.simpId || draftCourse?.id;
+      let found = slug ? findCourse(slug, isChoreo ? 'choreo' : undefined) : undefined;
+      if (!found && !params.id && !params.simpId) {
+        const items = isChoreo ? choreos : courses;
+        found = items.find(item => item.courseName === draftCourse?.courseName);
       }
 
       if (!found) throw new Error(isChoreo ? 'Хореография не найдена' : 'Курс не найден');

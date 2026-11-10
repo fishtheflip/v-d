@@ -10,14 +10,12 @@ import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 
 import { useAuth } from '../auth/AuthProvider';
-import { db } from '../lib/firestore';
-import { collection, getDocs } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import heroImg from '../assets/banner.webp';
-import { getCachedChoreos, getCachedCourses, loadChoreos, loadCourses } from '../lib/catalogCache';
+import { categories as localCategories, courses, choreos } from '../lib/localCatalog';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
 type Category = { id: string; name: string; title?: string; icon?: string };
@@ -34,90 +32,15 @@ type Course = {
 };
 type Choreo = { id: string; name: string; Author?: string; imgUrl?: string; simpId?: string };
 
-// =====================
-// 🔒 Простой кэш с TTL
-// =====================
-type CacheEntry<T> = { data: T; ts: number };
-type InFlightMap = Record<string, Promise<any> | undefined>;
-const TTL_MS = 60 * 60 * 1000; // 1 час
-const LS_PREFIX = 'home_cache:'; // префикс ключей в localStorage
-const memCache = new Map<string, CacheEntry<any>>();
-const inFlight: InFlightMap = {};
-
-function setToCache<T>(key: string, data: T) {
-  const entry: CacheEntry<T> = { data, ts: Date.now() };
-  memCache.set(key, entry);
-  try {
-    localStorage.setItem(LS_PREFIX + key, JSON.stringify(entry));
-  } catch {}
-}
-
-function getFromCache<T>(key: string): T | undefined {
-  const now = Date.now();
-  const mem = memCache.get(key);
-  if (mem && now - mem.ts < TTL_MS) return mem.data as T;
-
-  try {
-    const raw = localStorage.getItem(LS_PREFIX + key);
-    if (raw) {
-      const parsed = JSON.parse(raw) as CacheEntry<T>;
-      if (now - parsed.ts < TTL_MS) {
-        memCache.set(key, parsed);
-        return parsed.data;
-      }
-    }
-  } catch {}
-  return undefined;
-}
-
-async function cachedFetch<T>(key: string, fetcher: () => Promise<T>): Promise<T> {
-  // 1) свежий кэш
-  const cached = getFromCache<T>(key);
-  if (cached !== undefined) return cached;
-
-  // 2) есть активный запрос — дожидаемся
-  if (inFlight[key]) return inFlight[key] as Promise<T>;
-
-  // 3) идём в сеть
-  const p = fetcher()
-    .then((data) => {
-      setToCache(key, data);
-      return data;
-    })
-    .finally(() => {
-      inFlight[key] = undefined;
-    });
-
-  inFlight[key] = p;
-  return p;
-}
-
-// =====================
-// 🧩 Вспомогалки
-// =====================
-const EMOJIS = ['', '', '', '', '', '', '', '', '', ''];
-const addIcons = (items: Category[]): Category[] => {
-  let i = 0;
-  return items.map((item) => {
-    let icon = EMOJIS[i++ % EMOJIS.length];
-    if (item.name === 'Hobby Male') icon = '';
-    else if (item.name === 'Hobby Female') icon = '';
-    return { ...item, icon };
-  });
-};
-
 export default function HomePageWeb() {
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
-  const { user, loading: authLoading } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [popular, setPopular] = useState<Course[]>([]);
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [choreos, setChoreos] = useState<Choreo[]>([]);
-  const [loading, setLoading] = useState(true);
-
+  const categories: Category[] = localCategories;
+  const popular = courses.filter(course => course.popular);
+  const loading = false;
   // 🔔 UI ошибки
   const [error, setError] = useState<string | null>(null);
   const [toastOpen, setToastOpen] = useState(false);
@@ -159,6 +82,7 @@ export default function HomePageWeb() {
   const openChoreo = (ch: Choreo) => {
     navigate('/course', {
       state: {
+        id: ch.id,
         courseName: ch.name,
         imgUrl: ch.imgUrl,
         authorTitle: ch.Author,
@@ -168,85 +92,7 @@ export default function HomePageWeb() {
     });
   };
 
-  // ================
-  // 🔽 Фетчеры с кэшем
-  // ================
-  const fetchCategories = async () =>
-    cachedFetch<Category[]>('categories', async () => {
-      const snap = await getDocs(collection(db, 'category'));
-      const rows = snap.docs.map((d) => ({ id: d.id, ...(d.data() as any) })) as Category[];
-      return addIcons(rows);
-    });
-
-  const fetchCourses = async () => loadCourses() as Promise<Course[]>;
-  const fetchChoreos = async () => loadChoreos() as Promise<Choreo[]>;
-
-  // 👇 Загрузка
-  const loadData = async () => {
-    if (authLoading) return;
-
-    try {
-      setLoading(true);
-      setError(null);
-
-      // подставим кэш, если есть
-      const cachedCat = getFromCache<Category[]>('categories');
-      const cachedCh = getCachedChoreos() as Choreo[] | null;
-      const cachedCourses = getCachedCourses() as Course[] | null;
-      if (cachedCat) setCategories(cachedCat);
-      if (cachedCh) setChoreos(cachedCh);
-      if (cachedCourses) {
-        setCourses(cachedCourses);
-        setPopular(cachedCourses.filter((course) => course.popular));
-      }
-
-      // Подтягиваем блоки независимо: категории не должны пропадать,
-      // если курсы/хореографии временно не доступны после login/logout.
-      const [catResult, chResult, coursesResult] = await Promise.allSettled([
-        fetchCategories(),
-        fetchChoreos(),
-        fetchCourses(),
-      ]);
-
-      if (catResult.status === 'fulfilled') {
-        setCategories(catResult.value);
-      } else if (!cachedCat) {
-        throw catResult.reason;
-      }
-
-      if (chResult.status === 'fulfilled') {
-        setChoreos(chResult.value);
-      }
-
-      if (coursesResult.status === 'fulfilled') {
-        setCourses(coursesResult.value);
-        setPopular(coursesResult.value.filter((course) => course.popular));
-      }
-
-      const failedOptional = [chResult, coursesResult].some((result) => result.status === 'rejected');
-      if (failedOptional && !cachedCh && !cachedCourses) {
-        setError('Часть данных не загрузилась. Категории доступны, попробуйте обновить страницу.');
-        setToastOpen(true);
-      }
-    } catch (e: any) {
-      console.error('Ошибка загрузки данных:', e);
-      setError(e?.message || 'Не удалось загрузить данные. Попробуйте ещё раз.');
-      setToastOpen(true);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    let unmounted = false;
-    (async () => {
-      if (!unmounted) await loadData();
-    })();
-    return () => {
-      unmounted = true;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authLoading, user?.uid]);
+  const loadData = () => setError(null);
 
   const hello = useMemo(() => {
     const name = user?.displayName?.trim();

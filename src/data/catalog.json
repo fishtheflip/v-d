@@ -1,0 +1,1118 @@
+{
+  "courses": [
+    {
+      "id": "31",
+      "simpId": "break1",
+      "courseId": 101,
+      "imgUrl": "https://i.ibb.co/nsGXZvLP/IMG-0087.jpg",
+      "courseName": "Breaking",
+      "lessons": [
+        {
+          "name": "Intro",
+          "img": "tes",
+          "videoId": "https://player.vimeo.com/video/1117733203?h=6d58d3a29c&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "isOpen": true,
+          "duration": "01:07",
+          "description": "Мы начинаем курс! В этом видео познакомимся с направлениями, базовыми принципами и атмосферой брейкинга. Поговорим о том, что ждёт вас впереди и как максимально эффективно пройти курс."
+        },
+        {
+          "name": "Six step",
+          " description": "В этом видео изучим легендарный 6 Step — базу брейкинга. Шесть шагов по кругу создают плавное, цикличное движение, которое соединяет всё тело в один поток.",
+          "isOpen": true,
+          "duration": "04:07",
+          "videoId": "https://player.vimeo.com/video/1110771702?h=e62d1891a9&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+        },
+        {
+          "isOpen": true,
+          "duration": "02:28",
+          "name": "Kick out",
+          "videoId": "https://player.vimeo.com/video/1110771742?h=22bb66f709&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "description": "Сегодня разбираем Kick Out — резкий выброс ног в стороны из позиции сидя. Это мощный акцент, добавляющий силу и выразительность футворку."
+        },
+        {
+          "duration": "02:48",
+          "name": "Turns footwork",
+          "videoId": "https://player.vimeo.com/video/1110771772?h=562d69025d&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "description": "На этом уроке — Turns Footwork, вращения в футворке. Учимся менять направление, сохраняя контроль и динамику в движении по полу.",
+          "isOpen": false
+        },
+        {
+          "description": "Сегодня разбираем CC — одно из самых узнаваемых движений брейкинга. Одна нога скользит по полу, другая опорная, тело раскачивается в ритме музыки.",
+          "duration": "02:45",
+          "isOpen": false,
+          "name": "CC",
+          "videoId": "https://player.vimeo.com/video/1117763260?h=6ce662c431&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" style=\"position:absolute;top:0;left:0;width:100%;height:100%;"
+        },
+        {
+          "duration": "02:13",
+          "name": "Criss cross footwork",
+          "videoId": "https://player.vimeo.com/video/1117764681?h=06bc0c2c02&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "description": "На этом уроке проработаем Criss Cross Footwork — перекрестные шаги ногами, создающие насыщенный и быстрый рисунок внизу. Это добавляет сложности и стильности футворку.",
+          "isOpen": false
+        },
+        {
+          "isOpen": false,
+          "description": "Russian step – шаги в стиле казачка: опора на руки и резкие выбросы ног вперёд.",
+          "videoId": "https://player.vimeo.com/video/1117766775?h=53a7cc2d98&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "name": "Russian step ",
+          "duration": "03:32"
+        },
+        {
+          "description": "На этом уроке — 3 Step, ускоренная версия 6 Step. Три шага — три акцента, быстрый ритм и компактная форма. Отлично подходит для связок и переходов.",
+          "name": "3 Step",
+          "isOpen": false,
+          "videoId": "https://player.vimeo.com/video/1117773328?h=9def2b7619&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "duration": "05:06"
+        },
+        {
+          "isOpen": false,
+          "name": "Hook",
+          "name ": "Hook",
+          "description": "Сегодня разберём Hook — зацеп ногой за другую или за корпус. Это деталь, добавляющая выразительность, стиль и акцент в футворке.",
+          "videoId": "https://player.vimeo.com/video/1117780250?h=b0686e0312&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "duration": "03:13"
+        },
+        {
+          "isOpen": false,
+          "description": "В этом видео изучим Zulu Spin — вращение на полу в позе сидя, с опорой на руки и ноги. Это элемент, который придаёт танцу живость и контроль.",
+          "videoId": "https://player.vimeo.com/video/1117786464?h=ab5fbe8550&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "name": " Zulu spin",
+          "duration": "04:21"
+        },
+        {
+          "duration": "04:36",
+          "videoId": "https://player.vimeo.com/video/1117795735?h=4f2a6b3fb9&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "description": "Сегодня отработаем Helicopter — круговые движения ногами по полу, напоминающие лопасти вертолёта. Учимся плавности, скорости и координации.",
+          "isOpen": false,
+          "name": "Helicopter"
+        },
+        {
+          "description": "На этом уроке создадим Combo — связку из нескольких элементов. Объединим изученные движения в цельный поток, тренируя музыкальность и переходы.",
+          "isOpen": false,
+          "name": "Combo",
+          "duration": "02:52",
+          "videoId": "https://player.vimeo.com/video/1117791608?h=2cb2714a49&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n"
+        },
+        {
+          "duration": "02:11",
+          "description": "Советы по технике, стилю и контролю движений.",
+          "isOpen": false,
+          "videoId": "https://player.vimeo.com/video/1117791707?h=7d93fe59dc&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "name": "Tips"
+        },
+        {
+          "description": "Первое базовое движение. Top rock. Cross step.",
+          "name": "Cross step",
+          "videoId": "https://player.vimeo.com/video/1117923847?h=54f427f9cc&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "isOpen": true,
+          "duration": "03:17"
+        },
+        {
+          "description": "Следующее движение раздела top rock - Kick, вынос ноги носком/пяткой вперёд или вбок с возвратом в стойку.",
+          "name": "Kick",
+          "videoId": "https://player.vimeo.com/video/1117946600?h=5f4fa27291&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "duration": "06:08",
+          "isOpen": false
+        },
+        {
+          "videoId": "https://player.vimeo.com/video/1117923784?h=86c4d84bad&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "duration": "04:02",
+          "description": "Быстрые перекрёстные прыжки «крест–открыто», добавляют динамику, работай пружиной в коленях и не зажимай корпус.",
+          "name": "Side Step"
+        },
+        {
+          "videoId": "https://player.vimeo.com/video/1117941682?h=9b9deecea0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "description": "Turns — повороты на стопах на 90–360°, держи ось и используй руки/spotting для контроля баланса.",
+          "duration": "04:47",
+          "name": "Turns",
+          "isOpen": false
+        },
+        {
+          "isOpen": false,
+          "description": "Criss cross - быстрые перекрёстные прыжки «крест–открыто», добавляют динамику, работай пружиной в коленях и не зажимай корпус.",
+          "videoId": "https://player.vimeo.com/video/1117930229?h=6bcb5d730f&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "name": "Criss cross",
+          "duration": "03:13"
+        },
+        {
+          "isOpen": false,
+          "name": "Go Down",
+          "videoId": "https://player.vimeo.com/video/1110675558?h=8d665acd08&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "description": "В этом видео изучим Go Down — переход с верхнего уровня вниз. Разберём, как мягко и стильно войти во футворк, сохраняя ритм и баланс.",
+          "duration": "03:55"
+        },
+        {
+          "videoId": "https://player.vimeo.com/video/1110675383?h=194ab949b6&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "isOpen": true,
+          "name": "Turtle",
+          "duration": "03:41",
+          "description": "Turtle – силовой элемент на руках, когда тело держится на локтях, прижатых к животу, с балансом на руках."
+        },
+        {
+          "duration": "03:04",
+          "isOpen": false,
+          "videoId": "https://player.vimeo.com/video/1110675488?h=f671c8a686&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "description": "Baby freeze – базовый фриз: колено упирается в локоть, а другая рука поддерживает баланс, создавая устойчивую позу.",
+          "name": " Baby freeze"
+        },
+        {
+          "videoId": "https://player.vimeo.com/video/1117795243?h=035d10f602&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "name": "Combo full",
+          "isOpen": false,
+          "duration": "04:10",
+          "description": "Combo full – полноценная связка из футворка, фризов и силовых элементов, собранная в цельное выступление."
+        },
+        {
+          "description": "Поздравляем с завершением курса! \nНа этом уроке мы подведём итоги, вспомним ключевые элементы, обсудим, как продолжить развиваться и совершенствоваться в танце.\nПусть этот курс станет только началом вашего пути!\nДелитесь своими результатами и прогрессом в Instagram и TikTok, отмечайте нас — нам важно видеть, как вы растёте и вдохновляете других.\nЖдём вас на следующих сезонах, где вас ждут новые движения, техники и энергия! \nДо скорых встреч на танцполе! ",
+          "name": "Outro",
+          "videoId": "https://player.vimeo.com/video/1117795243?h=035d10f602&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "isOpen": false,
+          "duration": "00:33"
+        }
+      ],
+      "authorTitle": "Shadr",
+      "sumLessons": "23",
+      "Info": "о курсе",
+      "Authors": [
+        {
+          "authorId": "",
+          "authorName": "Shadr"
+        }
+      ],
+      "popPriority": 10000,
+      "level": "Начинающий",
+      "seasonNum": 1,
+      "sumDuration": "60",
+      "popular": false,
+      "priority": 1,
+      "documentId": "7aHOgRt6b0ebzmMguvJR"
+    },
+    {
+      "id": "32",
+      "Authors": [
+        {
+          "authorId": "",
+          "authorName": "Alik"
+        }
+      ],
+      "level": "Начинающий",
+      "courseId": 101,
+      "lessons": [
+        {
+          "name": "Intro",
+          "description": "Привет! Рады видеть тебя в программе, где грув, ритм и форма встречаются с системной тренировкой. Этот курс — про то, чтобы твоё тело слышало музыку, а движения были чистыми, уверенными и твоими. Будет просто, понятно и по делу: от базы к связкам, от счёта — к музыке, от повторения — к фристайлу.",
+          "isOpen": true,
+          "duration": "00:52",
+          "videoId": "https://player.vimeo.com/video/1115767437?h=8099d76182&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+        },
+        {
+          "name": "Groove",
+          "isOpen": true,
+          "videoId": "https://player.vimeo.com/video/1115792916?h=22e1731c70&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "description": "Groove — это общий кач тела в ритм музыки, который создаёт характер и настроение танца.",
+          "duration": "04:26"
+        },
+        {
+          "description": "Isolation — контроль отдельных частей тела (bounce, rock, flow), добавляющий чёткость и выразительность.",
+          "duration": "04:38",
+          "name": "Isolation (bounce/rock/flow)",
+          "isOpen": true,
+          "videoId": "https://player.vimeo.com/video/1118032275?h=592544ecb8&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n"
+        },
+        {
+          "description": "Footwork — работа ног по полу шагами и рисунками, формирующая основу движений и пространство танца.",
+          "duration": "10:45",
+          "isOpen": false,
+          "name": "Footwork",
+          "videoId": "https://player.vimeo.com/video/1119399224?h=3caba0dd6b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n"
+        },
+        {
+          "isOpen": false,
+          "duration": "05:51",
+          "videoId": "https://player.vimeo.com/video/1118074153?h=a274e775cf&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "description": "Знакомимся с тремя базовыми концептами рук и их задачей в хип-хопе. Отрабатываем траектории, чтобы рука не «летала» и не ломала корпус. Учимся держать плечи свободными, а ладони — выразительными. Склеиваем руки с шагом/центром, чтобы всё звучало вместе. Разбираем ошибки: зажатые плечи, прямые локти, «пустая» кисть. На выходе — рабочие вариации, которые легко ставятся в любую связку.",
+          "name": "Простые варианты рук"
+        },
+        {
+          "videoId": "https://player.vimeo.com/video/1118053553?h=7a73e7b05c&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "isOpen": false,
+          "name": "Combo",
+          "description": "Собираем словарь: называем базовые движения и учимся склеивать их в короткую комбинацию. Отрабатываем счёт и расстановку акцентов внутри 8-ки. Следим за формой тела, чтобы не терять стиль в погоне за скоростью. Делаем несколько чит-упражнений на память и чистоту. Исправляем косяки: сбивка по счёту, «проваливающийся» центр, спешка. Результат — короткая, чистая комбинация, которую можно расширять дальше.",
+          "duration": "12:58"
+        },
+        {
+          "description": "Разбираем механику Running Man: шаг, отталкивание, возврат, работа колен. Привязываем элемент к счёту и акцентам, чтобы он «сел» в музыку. Следим за корпусом: где держать, где отпустить. Делаем вариативности по направлению/уровню. Исправляем типовые ошибки — «прыжковость», шум в стопе, потеря баланса. Итог — уверенный, музыкальный Running Man, готовый к связкам.",
+          "videoId": "https://player.vimeo.com/video/1116610757?h=68c7cfb58c&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "isOpen": false,
+          "duration": "12:16",
+          "name": "Direction / Levels"
+        },
+        {
+          "isOpen": false,
+          "description": "Погружаемся в ритм и структуру музыки. Учимся слышать акценты, биты, паузы и понимать, как тело может отражать звуковые слои. Отрабатываем groove и взаимодействие с треком.",
+          "name": "Musicality",
+          "videoId": "https://player.vimeo.com/video/1116533094?h=8f59aa6d8b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "duration": "12:15"
+        },
+        {
+          "duration": "14:16",
+          "description": "Осваиваем более сложные концепты движений руками и их сочетание с работой ног. Развиваем координацию, контроль и осознанность в движении.",
+          "name": "Advanced hands",
+          "videoId": "https://player.vimeo.com/video/1123588115?h=f4bf2b03d2&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "isOpen": false
+        },
+        {
+          "duration": "09:31",
+          "description": "Учимся скользящим движениям — глайдам и слайдам. Разбираем технику переноса веса, скольжения и визуальной иллюзии плавности.",
+          "name": "Glides / Slides",
+          "videoId": "https://player.vimeo.com/video/1123579267?h=8496ca014e&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479%2Fembed\n",
+          "isOpen": true
+        },
+        {
+          "videoId": "https://player.vimeo.com/video/1118102663?h=a0cc4f58e8&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479%2Fembed",
+          "name": "Space",
+          "description": "Изучаем, как использовать пространство вокруг: направления, уровни, движение корпуса и взаимодействие с воображаемыми точками. Работаем с ощущением тела в пространстве.",
+          "isOpen": false,
+          "duration": "07:18"
+        },
+        {
+          "name": "Practice Tips",
+          "description": "Говорим о структуре занятий, типах тренировок и способах развития через практику. Получаем рекомендации по разминке, развитию техники и импровизации.",
+          "duration": "08:23",
+          "isOpen": false,
+          "videoId": "https://player.vimeo.com/video/1115763180?h=ca092723e5&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+        },
+        {
+          "isOpen": false,
+          "name": "Outro",
+          "videoId": "https://player.vimeo.com/video/1115767475?h=27b576b89a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "duration": "00:51",
+          "description": "Поздравляем с завершением курса! \nПодводим итоги обучения, вспоминаем ключевые движения и идеи, которые вы освоили.\nОбсуждаем, как продолжить тренировки самостоятельно, развиваться в стиле осознанно и вдохновлённо.\nЭтот курс — не конец, а начало вашего большого пути в танце!\nДелитесь своими результатами и прогрессом в Instagram и TikTok, отмечайте нас — мы с радостью посмотрим, как вы растёте.\nЖдём вас на следующих сезонах, где вас ждут новые движения, эмоции и открытия.\nДо скорых встреч на танцполе! "
+        }
+      ],
+      "sumDuration": "98",
+      "sumLessons": "11",
+      "Info": "о курсе",
+      "seasonNum": 1,
+      "courseName": "Hip-Hop",
+      "popPriority": 9,
+      "popular": true,
+      "authorTitle": "Alik",
+      "priority": 2,
+      "simpId": "hiphop1",
+      "imgUrl": "https://i.ibb.co.com/pvn41xrs/GRS06583.jpg",
+      "documentId": "86azvklekl1s5d1qiTzK"
+    },
+    {
+      "id": "35",
+      "simpid": "poping1",
+      "seasonNum": 1,
+      "popPriority": 4,
+      "imgUrl": "https://i.ibb.co.com/QvXftCPk/2025-10-21-14-23-36.jpg",
+      "sumDuration": "100",
+      "sumLessons": "10",
+      "lessons": [
+        {
+          "duration": "01:58",
+          "description": "На этом вводном уроке познакомимся с основами popping. Настроимся на энергию курса и атмосферу фанк-культуры.",
+          "name": "Intro",
+          "isOpen": true,
+          "videoId": "https://player.vimeo.com/video/1127804490?h=8020dcab1f&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "img": "tes"
+        },
+        {
+          "isOpen": true,
+          "description": "Сегодня разберём историю стиля — от уличных джемов 70-х до современных баттлов. Поймём, как развивались направления popping, boogaloo, waving и animation. Это поможет лучше чувствовать дух культуры и понимать, откуда пришли движения.",
+          "duration": "04:28",
+          "videoId": "https://player.vimeo.com/video/1117418562?h=c7b5528453&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "name": "History of style"
+        },
+        {
+          "description": "В этом уроке мы изучим базовые принципы popping: удары мышцами (pop), контроль тела, силу и чёткость движений. Разберём, как строится groove и акценты под музыку, чтобы движения звучали ритмично и уверенно.",
+          "isOpen": true,
+          "name": "Foundation",
+          "duration": "12:42",
+          "videoId": "https://player.vimeo.com/video/1125469895?h=7f4162ff5c&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479%2Fembed"
+        },
+        {
+          "duration": "11:58",
+          "description": "На этом занятии сосредоточимся на музыкальности — научимся слышать инструментальные слои, подчеркивать бит и делать танец “живым”. Узнаем, как синхронизировать акценты popping с басом, барабанами и мелодией.",
+          "isOpen": true,
+          "videoId": "https://player.vimeo.com/video/1117423166?h=7cdef453ff&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "name": "Musicality"
+        },
+        {
+          "isOpen": false,
+          "duration": "07:44",
+          "name": "Boogaloo, Popping, Dime Stop",
+          "description": "Изучаем подстили popping: boogaloo — круговые волны и подвижность корпуса, dime stop — резкая остановка в конце движения, и классический popping. Научимся соединять их в цельную манеру исполнения.",
+          "videoId": "https://player.vimeo.com/video/1125446184?h=8d4faf6508&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+        },
+        {
+          "videoId": "https://player.vimeo.com/video/1126858641?h=6a05902c3e&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "isOpen": false,
+          "duration": "10:12",
+          "description": "Разберём положения рук, кистей и предплечий в popping. Поймём, как через руки передаётся акцент, стиль и настроение. Попрактикуем изоляции и линии, чтобы движения выглядели чисто и мощно.",
+          "name": "Hands position"
+        },
+        {
+          "videoId": "https://player.vimeo.com/video/1127442756?h=b952db487b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "duration": "11:26",
+          "description": "В этом видео изучаем работу ног и корпуса — базовые перемещения и принципы баланса. Научимся сохранять стабильность и гибкость, двигаясь уверенно и пластично в пространстве.",
+          "name": "Первые шаги, корпус",
+          "isOpen": false
+        },
+        {
+          "duration": "05:29",
+          "videoId": "https://player.vimeo.com/video/1126859652?h=7f68d782ef&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479%2Fembed",
+          "name": "Isolation",
+          "description": "Сегодня сфокусируемся на изоляциях: научимся двигать отдельными частями тела независимо друг от друга. Это фундамент для точного контроля и выразительности в popping.",
+          "isOpen": false
+        },
+        {
+          "videoId": "https://player.vimeo.com/video/1126859939?h=53f3d9cbc6&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "description": "Познакомимся с различными стилистическими направлениями popping — waving, robot, animation. Попробуем каждое направление на практике и разберём, как через стиль выразить характер танцора.",
+          "duration": "01:36",
+          "isOpen": false,
+          "name": "Стилистики"
+        },
+        {
+          "videoId": "https://player.vimeo.com/video/1127784601?h=1f85586b2f&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "name": "Technics",
+          "ioOpen": false,
+          "duration": "11:00",
+          "description": "Разберём технические детали исполнения: силу pop-а, дыхание, акцент, фиксацию и расслабление. Научимся управлять телом так, чтобы движения выглядели естественно, но при этом мощно и чётко."
+        },
+        {
+          "description": "На этом уроке разбираем инструменты динамики: контраст, темп, паузы, взрывы и мягкость. Учимся создавать “дыхание” танца, чтобы popping стал многослойным и выразительным.",
+          "isOpen": false,
+          "name": "Dynamics",
+          "videoId": "https://player.vimeo.com/video/1127785123?h=66b22cd61a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "duration": "19:02"
+        },
+        {
+          "duration": "01:46",
+          "isOpen": false,
+          "videoId": "https://player.vimeo.com/video/1125480855?h=73a45248c8&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479%2Fembed",
+          "description": "Поздравляем с завершением курса! Подводим итоги, вспоминаем ключевые техники и рекомендации для самостоятельной практики.\nПродолжайте развиваться, снимайте свои фристайлы, делитесь в TikTok и Instagram, отмечайте нас — вдохновляйте других своим прогрессом.\nДо встречи на следующих сезонах VITE DANCE!",
+          "name": "Outro"
+        }
+      ],
+      "courseId": 101,
+      "courseName": "Popping",
+      "Authors": [
+        {
+          "authorId": "",
+          "authorName": "Almas"
+        }
+      ],
+      "Info": "о курсе",
+      "priority": 3,
+      "level": "Начинающий",
+      "authorTitle": "Almas",
+      "popular": true,
+      "documentId": "ASj5aTPD4B0hWF6EZL0V"
+    },
+    {
+      "id": "37",
+      "seasonNum": 1,
+      "courseName": "Afro",
+      "lessons": [
+        {
+          "description": "На этом уроке мы познакомимся с направлением и атмосферой курса. Поговорим о ритме афрохауса, энергетике движений и целях курса.",
+          "duration": "00:48",
+          "videoId": "https://player.vimeo.com/video/1117719144?h=82bbb8daaf&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "isOpen": true,
+          "name": "Intro"
+        },
+        {
+          "name": "Abrir",
+          "isOpen": true,
+          "description": "Разберём Abrir — мощное раскрытие грудью и руками, которое «включает» пространство и заряд. Этот элемент снимает зажимы и добавляет выразительную подачу.",
+          "duration": "04:27",
+          "videoId": "https://player.vimeo.com/video/1106446777?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+        },
+        {
+          "duration": "05:36",
+          "name": "Canastra",
+          "description": "На этом уроке мы изучим Canastra — шаги с акцентами вниз и в стороны, имитирующие перенос корзины. Это движение развивает устойчивость и чувство ритма.",
+          "videoId": "https://player.vimeo.com/video/1106844349?h=c315851e92&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "isOpen": true
+        },
+        {
+          "name": "Sapato do boyca",
+          "duration": "06:36",
+          "isOpen": false,
+          "description": "Практикуем Sapato do boyca — аккуратные, но выразительные удары ногами, которые подчеркивают ритм и придают танцу насыщенный грув.",
+          "videoId": "https://player.vimeo.com/video/1106844553?h=b643dc64ce&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+        },
+        {
+          "description": "На этом уроке мы освоим Viola — мягкие круговые движения ногами, напоминающие игру на инструменте. Это движение придаёт танцу пластичность и текучесть.",
+          "videoId": "https://player.vimeo.com/video/1106844820?h=9d5b88352a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "isOpen": false,
+          "duration": "05:42",
+          "name": "Viola"
+        },
+        {
+          "isOpen": false,
+          "duration": "04:20",
+          "videoId": "https://player.vimeo.com/video/1106845041?h=edb9f645d3&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "description": "Базовый степ с акцентом на волны корпусом/грудью и мягкую пластичность рук, отсылающий к спокойствию. Часто используется как переход между более жёсткими акцентами.",
+          "name": "Yoga"
+        },
+        {
+          "description": "На этом уроке разберём Cala a boca — взрывное и акцентное движение ногами, которое добавляет силу и мощь танцу.",
+          "videoId": "https://player.vimeo.com/video/1107376532?h=8951b56c91&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "isOpen": false,
+          "duration": "04:12",
+          "name": " Cala a boca"
+        },
+        {
+          "videoId": "https://player.vimeo.com/video/1107377032?h=fe7c7b5127&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "isOpen": false,
+          "duration": "04:43",
+          "description": "На этом уроке мы изучим комбинацию Vou Partir Cama — сочетание резких и мягких шагов, создающее игру ритма и динамику.",
+          "name": "Vou Partir Cama"
+        },
+        {
+          "duration": "07:10",
+          "videoId": "https://player.vimeo.com/video/1110758727?h=7eecf0fc6f&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "description": "На этом уроке мы сосредоточимся на footwork — работе ног по полу с акцентами и узорами, которая подчёркивает музыкальность и чувство ритма.",
+          "isOpen": false,
+          "name": "Footwork"
+        },
+        {
+          "duration": "03:01",
+          "isOpen": false,
+          "name": "Make up",
+          "videoId": "https://player.vimeo.com/video/1107993590?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "description": "На этом уроке мы освоим Make up — стильные жесты руками и позы, придающие характер и уверенность исполнителю."
+        },
+        {
+          "description": "На этом уроке мы разберём Nastra — динамичные шаги с перекрестами и сменой направления, которые добавляют разнообразие и игру с пространством.",
+          "videoId": "https://player.vimeo.com/video/1108066505?h=027cd5258a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "isOpen": false,
+          "duration": "05:06",
+          "name": "Nastra"
+        },
+        {
+          "duration": "03:00",
+          "description": "На этом уроке мы изучим Suсo — круговые движения корпуса и бёдер, создающие плавность и чувственность танца.",
+          "name": "Suco",
+          "isOpen": false,
+          "videoId": "https://player.vimeo.com/video/1110764801?h=ee81281b23&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n"
+        },
+        {
+          "isOpen": false,
+          "videoId": "https://player.vimeo.com/video/1110681202?h=f577a5526f&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "description": "На этом уроке мы соберём Combo — связку из нескольких элементов афрохауса в одном потоке. Соединим технику, ритм и энергию в цельный танец.",
+          "duration": "06:10",
+          "name": "Combo"
+        },
+        {
+          "description": "Поздравляю с завершением! 🎉\nНа этом финальном уроке подведём итоги, вспомним ключевые движения и энергию афрохауса.\nПоговорим о том, как продолжать развитие в этом стиле — тренироваться осознанно, вдохновлённо и с чувством ритма.\nДелитесь своими результатами и танцевальными моментами в Instagram и TikTok, отмечайте нас, чтобы мы могли увидеть ваш прогресс.\nЖдём вас на следующих сезонах.",
+          "name": "Outro",
+          "duration": "00:25",
+          "videoId": "https://player.vimeo.com/video/1117718015?h=c5302aad80&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "isOpen": false
+        }
+      ],
+      "simpId": "afro1",
+      "Authors": [
+        {
+          "authorName": "Sofia",
+          "authorId": ""
+        }
+      ],
+      "sumLessons": "12",
+      "imgUrl": "https://i.ibb.co.com/Y7ym7hvG/2025-10-21-14-23-59.png",
+      "sumDuration": "58",
+      "priority": 4,
+      "popPriority": 1,
+      "level": "Начинающий",
+      "popular": true,
+      "courseId": 101,
+      "authorTitle": "Sofia",
+      "Info": "о курсе",
+      "documentId": "Hv29OX4vbVIObX5Uev7V"
+    },
+    {
+      "id": "38",
+      "lessons": [
+        {
+          "videoId": "https://player.vimeo.com/video/1123706224?h=e3244857cb&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "img": "tes",
+          "isOpen": true,
+          "description": "На этом вводном уроке познакомимся с философией Krump — танца силы, веры и самовыражения, let's start.",
+          "duration": "01:20",
+          "name": "Intro"
+        },
+        {
+          "isOpen": true,
+          "duration": "11:19",
+          "videoId": "https://player.vimeo.com/video/1119052106?h=8456bd11d6&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "name": "Grab",
+          "description": "Сегодня разберём одно из ключевых движений krump — Grab. Это захваты и выбросы энергии, символизирующие внутреннюю борьбу и силу. Научимся использовать руки так, чтобы каждое движение выглядело намеренным и мощным."
+        },
+        {
+          "videoId": "https://player.vimeo.com/video/1119052229?h=4a5a7f5e5f&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "duration": "09:29",
+          "name": "Stance",
+          "description": "В этом уроке изучаем Stance — базовую стойку и позицию тела, откуда начинается каждый взрыв krump-а. Отрабатываем устойчивость, дыхание и контроль — то, что создаёт основу уверенного и агрессивного стиля.",
+          "isOpen": true
+        },
+        {
+          "name": "Stomp",
+          "duration": "15:47",
+          "description": "На этом видео изучим Stomp — удары ногами, через которые выражается ритм и энергия. Разберём, как создавать мощные акценты, чувствовать бит и взаимодействовать с пространством, сохраняя баланс и драйв.",
+          "videoId": "https://player.vimeo.com/video/1123796020?h=a8ce24cd50&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "isOpen": true
+        },
+        {
+          "name": "Swing / Arm Swing",
+          "isOpen": true,
+          "videoId": "https://player.vimeo.com/video/1123870136?h=c023ceedb8&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "duration": "09:23",
+          "description": "Сегодня работаем с Swing — амплитудными махами рук. Изучим, как соединять резкость и свободу движений, чтобы каждый замах выглядел как взрыв эмоций. Swing помогает раскрыть пластику и добавить характер в ваш Krump."
+        },
+        {
+          "name": "Сhest pop",
+          "videoId": "https://player.vimeo.com/video/1126145877?h=0b079a49d8&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "duration": "16:34",
+          "isOpen": false,
+          "description": "На этом уроке освоим Chest Pop — технику акцентированной работы грудной клеткой: точные удары, осознанные паузы и контроль корпуса. Научимся выделять каждое движение, строить короткие фразы и управлять силой изнутри."
+        }
+      ],
+      "level": "Начинающий",
+      "sumLessons": "14",
+      "sumDuration": "70",
+      "popPriority": 100000,
+      "courseName": "Krump",
+      "Authors": [
+        {
+          "authorName": "Dauren",
+          "authorId": ""
+        }
+      ],
+      "seasonNum": 1,
+      "courseId": 101,
+      "imgUrl": "https://i.ibb.co/G3GjhMKk/photo-2025-05-31-20-06-12.jpg",
+      "priority": 8,
+      "simpId": "krump1",
+      "popular": false,
+      "Info": "о курсе",
+      "authorTitle": "Dauren",
+      "documentId": "XvCcW5Se9SDzr1nD6X0Y"
+    },
+    {
+      "id": "39",
+      "courseName": "Waacking",
+      "Authors": [
+        {
+          "authorId": "",
+          "authorName": "Nadi"
+        }
+      ],
+      "sumLessons": "10",
+      "Info": "о курсе",
+      "lessons": [
+        {
+          "name": "Intro",
+          "isOpen": true,
+          "videoId": "https://player.vimeo.com/video/1114481084?h=122c096769&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "img": "tes",
+          "description": "Узнаем, что такое ваакинг, откуда он появился и что делает его уникальным. Надя расскажет, как будет построен курс и чего от него ожидать.",
+          "duration": "00:58"
+        },
+        {
+          "description": "Изучим восемь ключевых позиций рук и тела, на которых строится весь стиль ваакинга. Отработаем форму и контроль.",
+          "videoId": "https://player.vimeo.com/video/1114224172?h=026b1834cb&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "name": "Posing",
+          "duration": "04:27",
+          "isOpen": true
+        },
+        {
+          "isOpen": true,
+          "description": "Разберём главное движение ваакинга — петлю. Поймём механику, направление и вариации исполнения.",
+          "videoId": "https://player.vimeo.com/video/1114215491?h=801e3088d1&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "name": "Базовые петли",
+          "duration": "06:46"
+        },
+        {
+          "duration": "07:28",
+          "videoId": "https://player.vimeo.com/video/1114215574?h=f99ad528c2&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "isOpen": true,
+          "name": "Combo",
+          "description": "Научимся объединять базовые позиции и петлю в плавные связки. Развиваем координацию и контроль над движением."
+        },
+        {
+          "description": "Поговорим о принципах импровизации в ваакинге — как чувствовать музыку, создавать индивидуальный стиль и не бояться ошибок.",
+          "videoId": "https://player.vimeo.com/video/1114244673?h=77e91a6149&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "name": "Концепты импровизации",
+          "duration": "06:27",
+          "isOprn": false
+        },
+        {
+          "description": "Освоим базовые шаги и ритмику ног в ваакинге, научимся работать на разных уровнях и сочетать движения рук и ног.",
+          "name": "Footwork",
+          "videoId": "https://player.vimeo.com/video/1124202986?h=0d5028b59a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "duration": "06:17",
+          "isOpen": false
+        },
+        {
+          "description": "Изучим изоляции, основанные на базовой петле, и добавим разнообразие через вариации и переходы.",
+          "videoId": "https://player.vimeo.com/video/1114472931?h=b1a61d3ccd&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479%2Fembed\n",
+          "name": "Isolation",
+          "isOpen": false,
+          "duration": "08:10"
+        },
+        {
+          "duration": "07:28",
+          "isOpen": false,
+          "description ": "Отработаем позинг, акценты и работу с музыкальностью. Поймём, как позы формируют характер танца.",
+          "videoId": "https://player.vimeo.com/video/1114627091?h=febcaf51d0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "name": "Advanced Posing"
+        },
+        {
+          "name": "Levels",
+          "isOpen": false,
+          "videoId": "https://player.vimeo.com/video/1124170358?h=df3b2c9102&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "duration": "04:44",
+          "description": "Изучим работу корпуса, наклоны и уровни в танце, создающие динамику и многослойность движений."
+        },
+        {
+          "isOpen": false,
+          "duration": "06:50",
+          "description": "Соединим всё изученное: движения рук, ног, корпуса и музыку в единую импровизационную структуру.",
+          "name": "Improvisation",
+          "videoId": "https://player.vimeo.com/video/1124167273?h=1e93b8c0cf&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+        },
+        {
+          "description": "Разучим финальную комбинацию, объединяющую все ключевые элементы курса в выразительную хореографию.",
+          "isOpen": false,
+          "videoId": "https://player.vimeo.com/video/1124228292?h=40aaaa1db8&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "name": "Choreo",
+          "duration": "08:04"
+        },
+        {
+          "description": "Подводим итоги обучения — вспоминаем ключевые движения, развитие пластики и музыкальности.\nНа этом уроке вы получите рекомендации по дальнейшей практике, чтобы продолжать совершенствоваться в ваакинге: развивать контроль, силу и артистизм.\nПродолжайте тренироваться с удовольствием, ищите свой стиль и делитесь результатами!\nПубликуйте свои видео в TikTok и Instagram, отмечайте нас, чтобы мы могли увидеть ваш прогресс и вдохновиться вместе.\nДо новых встреч на следующих сезонах — движение только начинается!",
+          "videoId": "https://player.vimeo.com/video/1124314550?h=748ee82838&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479%2Fembed",
+          "isOpen": false,
+          "name": "Outro",
+          "duration": "00:28"
+        }
+      ],
+      "sumDuration": "65",
+      "courseId": 101,
+      "popPriority": 2,
+      "seasonNum": 1,
+      "priority": 5,
+      "level": "Начинающий",
+      "popular": true,
+      "authorTitle": "Nadi",
+      "imgUrl": "https://i.ibb.co.com/F4S5nkG6/2025-10-16-16-06-11.png",
+      "simpId": "waacking2",
+      "documentId": "YrKcFIyjscc3PcSlJ6eu"
+    },
+    {
+      "id": "47",
+      "simpId": "kpop1",
+      "lessons": [
+        {
+          "duration": "00:56",
+          "img": "tes",
+          "description": "Добро пожаловать на курс K-Pop!\nКурс K-Pop: музыкальность, точные руки и уверенный синхрон. Учим связки, работаем над пластикой и подачей — готовим тебя к съёмкам и сцене.",
+          "isOpen": true,
+          "name": "Intro",
+          "videoId": "https://player.vimeo.com/video/1129138911?h=ebc9491966&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+        },
+        {
+          "name": "Lisa - FUTW",
+          "videoId": "https://player.vimeo.com/video/1129133615?h=5982114648&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "description": "На уроке разберём хореографию Lisa — “FUTW”: музыкальность и акценты, быстрые переключения текстур, чистые линии рук и корпуса. Отработаем уровни и перемещения, ключевые детали (кисти, плечи, взгляд), а также подачу и работу в кадре. В итоге соберёшь связку, закрепишь акценты и будешь готов уверенно снять результат.",
+          "duration": "17:40",
+          "isOpen": true
+        },
+        {
+          "name": "aespa - Whiplash ",
+          "duration": "20:59",
+          "videoId": "https://player.vimeo.com/video/1127838376?h=32554c84d9&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\n",
+          "isOpen": false,
+          "description": "На втором уроке разберём хореографию aespa — “Whiplash”: резкие акценты, переключения уровней и чёткая работа рук с корпусом. Отработаем синкопы и паузы, диагональные перемещения, а также детализацию (кисти, плечи, взгляд) для фирменного вайба. В конце соберёшь связку под оригинальный трек и подготовишься к уверённой съёмке в кадре."
+        },
+        {
+          "duration": "21:01",
+          "isOpen": false,
+          "name": "JENNIE - like JENNIE",
+          "description": "Изучим “LIKE JENNIE” — хореографию с характером и чёткими акцентами. Сфокусируемся на походке, линиях корпуса, руках и мимике, чтобы передать вайб трек",
+          "videoId": "https://player.vimeo.com/video/1127838376?h=32554c84d9&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+        }
+      ],
+      "imgUrl": "https://i.ibb.co.com/VcL4sPjC/2025-10-21-14-36-44.png",
+      "courseId": 101,
+      "Authors": [
+        {
+          "authorName": "Altynay",
+          "authorId": ""
+        }
+      ],
+      "level": "Начинающий",
+      "sumDuration": "40",
+      "popPriority": 7,
+      "seasonNum": 1,
+      "courseName": "K-pop",
+      "popular": true,
+      "authorTitle": "Altynay",
+      "sumLessons": "3",
+      "Info": "о курсе",
+      "priority": 6,
+      "documentId": "tZtoEqvn5n8M23fFiRXu"
+    }
+  ],
+  "choreos": [
+    {
+      "id": "201",
+      "imgUrl": "https://i.ibb.co/twmdcw4d/IMG-0091.jpg",
+      "lessons": [
+        {
+          "name": "Intro",
+          "description": "Начинаем",
+          "duration": "01:02",
+          "isOpen": true,
+          "videoId": "https://player.vimeo.com/video/1128766490?h=b87abe447d&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+        },
+        {
+          "name": "Part 1",
+          "isOpen": false,
+          "description": "Первая часть хореографии",
+          "videoId": "https://player.vimeo.com/video/1128859097?h=63087c722f&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479%2Fembed",
+          "duration": "10:19"
+        },
+        {
+          "duration": "14:32",
+          "description": "Вторая часть хореографии",
+          "videoId": "https://player.vimeo.com/video/1128859745?h=5bb4b01433&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479%2Fembed\n",
+          "isOpen": false,
+          "name": "Part 2"
+        }
+      ],
+      "AuthorId": "random",
+      "Author": "Rufina / Sofia",
+      "authorTitle": "Sofia",
+      "simpId": "choreo1",
+      "authors": [
+        "Rufina",
+        "Sofia"
+      ],
+      "name": "Mukaji Internationale",
+      "documentId": "MB7M6QoBXtYSn5bbf1nN"
+    },
+    {
+      "id": "202",
+      "simpId": "choreo2",
+      "AuthorId": "random",
+      "lessons": [
+        {
+          "duration": "00:59",
+          "videoId": "https://player.vimeo.com/video/1129015885?h=9e4dd557c6&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "description": "Start",
+          "name": "Intro",
+          "isOpen": true
+        },
+        {
+          "videoId": "https://player.vimeo.com/video/1129018166?h=2966262514&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "isOpen": false,
+          "duration": "08:00",
+          "description": "Часть первая",
+          "name": "Part 1"
+        },
+        {
+          "isOpen": false,
+          "description": "Вторая часть",
+          "videoId": "https://player.vimeo.com/video/1129020107?h=64e1359e62&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "duration": "09:11",
+          "name": "Part 2"
+        }
+      ],
+      "authors": [
+        "Altynay"
+      ],
+      "name": "Chk Chk Boom -  Stray Kids",
+      "imgUrl": "https://i.ibb.co.com/QFwsGdTD/DSC00152.jpg",
+      "authorTitle": "Altynay",
+      "Author": "Altynay",
+      "documentId": "gQbQO4MdlMNKi9jKyLZT"
+    },
+    {
+      "id": "203",
+      "name": "Low - SZA",
+      "authors": [
+        "Damir"
+      ],
+      "simpId": "choreo3",
+      "AuthorId": "random",
+      "authorTitle": "Damir",
+      "imgUrl": "https://i.ibb.co.com/vC7mJ6JF/2025-10-15-18-51-48.png",
+      "Author": "Damir",
+      "lessons": [
+        {
+          "isOpen": true,
+          "description": "На этом разборе хореографии мы изучаем авторскую постановку на трек SZA — “Low”.\nПогружаемся в атмосферу мягкого groove, пластики и уверенности, где каждое движение соединяет музыку и эмоции.\nХореография наполнена ритмом и свободой — она помогает прочувствовать музыку телом и раскрыть индивидуальность.\nГотовьтесь прочувствовать каждый акцент и передать историю через движение.",
+          "videoId": "https://player.vimeo.com/video/1125421143?h=1822a770ea&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+          "duration": "01:10",
+          "name": "Intro"
+        },
+        {
+          "description": "Добро пожаловать на разбор хореографии! \nСегодня мы вместе проживём музыку SZA — “Low”, шаг за шагом разберём движения, акценты и настроение композиции.\nПочувствуйте уверенность, текучесть и силу — дайте телу двигаться свободно и в ритме сердца.\nПусть этот разбор станет вашим моментом вдохновения и любви к танцу.",
+          "duration": "12:00",
+          "name": "Choreo",
+          "isOpen": false,
+          "videoId": "https://player.vimeo.com/video/1117733203?h=6d58d3a29c&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+        }
+      ],
+      "documentId": "wPxq1L2zUBgTDzTBjZdp"
+    }
+  ],
+  "authors": [
+    {
+      "id": "101",
+      "imgurl": "https://i.ibb.co.com/mFcjFwrf/2025-10-21-14-50-04.png",
+      "name": "Shadr",
+      "info": "about shadr",
+      "authorcourses": [
+        {
+          "id": 1001,
+          "img": "test",
+          "name": "Breaking",
+          "season": 1
+        }
+      ],
+      "category": [
+        "break"
+      ],
+      "priority": 1,
+      "authorId": 101,
+      "documentId": "1sCZwckHdfB3fjtLsivS"
+    },
+    {
+      "id": "102",
+      "authorId": 102,
+      "info": "about shadr",
+      "imgurl": "https://i.ibb.co.com/CKgkyRv9/2025-10-21-14-55-12.png",
+      "category": [
+        "popping"
+      ],
+      "authorcourses": [
+        {
+          "img": "test",
+          "name": "Almas",
+          "season": 1,
+          "id": 1001
+        }
+      ],
+      "name": "Almas",
+      "documentId": "2D518dZRaPSggHm80dEp"
+    },
+    {
+      "id": "103",
+      "name": "Altynay",
+      "category": [
+        "kpop",
+        "choreo"
+      ],
+      "info": "about shadr",
+      "authorcourses": [
+        {
+          "id": 1001,
+          "img": "test",
+          "name": "Breaking",
+          "season": 1
+        }
+      ],
+      "imgurl": "https://i.ibb.co.com/JRXjhmjW/2025-10-21-14-46-43.png",
+      "authorId": 103,
+      "documentId": "5g5RFbxkg9vUtWZUmyGM"
+    },
+    {
+      "id": "104",
+      "category": [
+        "hiphop"
+      ],
+      "name": "Alik",
+      "imgurl": "https://i.ibb.co/xq19jsSm/IMG-0096.jpg",
+      "authorId": 104,
+      "authorcourses": [
+        {
+          "id": 1001,
+          "img": "test",
+          "name": "Breaking",
+          "season": 1
+        }
+      ],
+      "info": "about shadr",
+      "documentId": "9VxenQQJ0frdr4FDViDf"
+    },
+    {
+      "id": "105",
+      "name": "Nadi",
+      "category": [
+        "waacking"
+      ],
+      "info": "about shadr",
+      "imgurl": "https://i.ibb.co/Fk1JzFm4/6.jpg",
+      "authorId": 105,
+      "authorcourses": [
+        {
+          "id": 1001,
+          "img": "test",
+          "name": "Breaking",
+          "season": 1
+        }
+      ],
+      "documentId": "9f0QwoC1rZnaCZvmFoe0"
+    },
+    {
+      "id": "106",
+      "name": "Damir",
+      "category": [
+        "choreo"
+      ],
+      "authorcourses": [
+        {
+          "id": 1001,
+          "img": "test",
+          "name": "Breaking",
+          "season": 1
+        }
+      ],
+      "info": "about shadr",
+      "imgurl": "https://i.ibb.co/JFdy5hCG/IMG-0100.jpg",
+      "authorId": 106,
+      "documentId": "AVY0S8vuVm2IIg8sG8VT"
+    },
+    {
+      "id": "110",
+      "authorId": 101,
+      "authorcourses": [
+        {
+          "id": 1001,
+          "img": "test",
+          "name": "Breaking",
+          "season": 1
+        }
+      ],
+      "info": "about shadr",
+      "imgurl": "https://i.ibb.co/nN05KqSt/IMG-0105.jpg",
+      "name": "Sofia",
+      "category": [
+        "afro",
+        "choreo"
+      ],
+      "documentId": "LbGdSe0iRzfWp1HbQdSp"
+    },
+    {
+      "id": "111",
+      "name": "Rufina",
+      "category": [
+        "afro",
+        "choreo"
+      ],
+      "info": "about shadr",
+      "imgurl": "https://i.ibb.co/1fvKzdgw/IMG-0108.jpg",
+      "authorId": 101,
+      "authorcourses": [
+        {
+          "id": 1001,
+          "img": "test",
+          "name": "Breaking",
+          "season": 1
+        }
+      ],
+      "documentId": "LxWlx1pzYLhSpp64m7tB"
+    },
+    {
+      "id": "115",
+      "info": "about shadr",
+      "authorcourses": [
+        {
+          "id": 1001,
+          "img": "test",
+          "name": "Breaking",
+          "season": 1
+        }
+      ],
+      "authorId": 101,
+      "name": "Dauren",
+      "category": [
+        "krump"
+      ],
+      "imgurl": "https://i.ibb.co.com/23fXV21z/2025-10-21-14-53-00.png",
+      "documentId": "VclGiMVCBQi1cSfEbd2n"
+    }
+  ],
+  "categories": [
+    {
+      "id": 10004,
+      "name": "Waacking",
+      "seasonCount": 1,
+      "coursesId": [
+        "random"
+      ],
+      "documentId": "7ISDh0NdgVz6l24NpjrJ"
+    },
+    {
+      "id": 10006,
+      "seasonCount": 1,
+      "name": "Afro",
+      "coursesId": [
+        "random"
+      ],
+      "documentId": "AYAYo4iapLUME4DAmDOE"
+    },
+    {
+      "id": 10010,
+      "courseId": [
+        "random"
+      ],
+      "name": "K-pop",
+      "seasonCount": 1,
+      "documentId": "BFnWCy4hWt2N3Bnyax0p"
+    },
+    {
+      "id": 10005,
+      "coursesId": [
+        "random"
+      ],
+      "seasonCount": 1,
+      "name": "Krump",
+      "documentId": "HaYDUEEksHZz3eDKrD86"
+    },
+    {
+      "id": 10001,
+      "name": "Breaking",
+      "seasonCount": 1,
+      "coursesId": [
+        "random"
+      ],
+      "documentId": "j4UBnP0Lx0lUslPK1bVw"
+    },
+    {
+      "id": 10003,
+      "courseId": [
+        "random"
+      ],
+      "name": "Hip-Hop",
+      "seasonCount": 1,
+      "documentId": "p5iKXkOkqYOh26mawJhe"
+    },
+    {
+      "id": 1002,
+      "seasonCount": 1,
+      "name": "Popping",
+      "courseId": [
+        "random"
+      ],
+      "documentId": "xvMEzGu3o6GjTwCCf42Z"
+    }
+  ]
+}

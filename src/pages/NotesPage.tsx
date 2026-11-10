@@ -11,11 +11,9 @@ import {
   Collapse,
   CircularProgress,
 } from '@mui/material';
-import { useEffect, useMemo, useState, useCallback } from 'react';
-import { db } from '../lib/firestore';
-import { collection, getDocs } from 'firebase/firestore';
+import { useMemo, useState, useCallback } from 'react';
+import { authors } from '../lib/localCatalog';
 import { useNavigate } from 'react-router-dom';
-import type { DocumentData, QueryDocumentSnapshot } from 'firebase/firestore';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
 type Teacher = {
   id: string;
@@ -26,37 +24,10 @@ type Teacher = {
   simpId?: string;        // ЧПУ-слизень, если есть
 };
 
-// ====== КЭШ (TTL = 1 час) ======
-const TTL_MS = 60 * 60 * 1000; // 1 час
-const K_AUTHORS = 'notes:authors';
-
-type CacheBox<T> = { ts: number; data: T };
-
-function readCache<T>(key: string): T | null {
-  try {
-    const raw = localStorage.getItem(key);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw) as CacheBox<T>;
-    if (!parsed || typeof parsed.ts !== 'number') return null;
-    if (Date.now() - parsed.ts > TTL_MS) return null;
-    return parsed.data;
-  } catch {
-    return null;
-  }
-}
-function writeCache<T>(key: string, data: T) {
-  try {
-    const box: CacheBox<T> = { ts: Date.now(), data };
-    localStorage.setItem(key, JSON.stringify(box));
-  } catch {
-    // ignore quota errors
-  }
-}
-
 export default function NotesPageWeb() {
-  const [teachers, setTeachers] = useState<Teacher[]>([]);
+  const teachers: Teacher[] = authors;
   const [selected, setSelected] = useState<string>('Все');
-  const [loading, setLoading] = useState(true);
+  const loading = false;
 
   // UI ошибки
   const [error, setError] = useState<string | null>(null);
@@ -64,45 +35,7 @@ export default function NotesPageWeb() {
 
   const navigate = useNavigate();
 
-  const loadData = async (opts?: { force?: boolean }) => {
-    const force = !!opts?.force;
-    try {
-      setLoading(true);
-      setError(null);
-
-      // 1) читаем кэш (если не force)
-      const cached = !force ? readCache<Teacher[]>(K_AUTHORS) : null;
-      if (cached) {
-        setTeachers(cached);
-        setLoading(false);
-        return;
-      }
-
-      // 2) тянем из Firestore
-      const snap = await getDocs(collection(db, 'authors'));
-      const list = snap.docs.map(
-        (d: QueryDocumentSnapshot<DocumentData>) =>
-          ({ id: d.id, ...(d.data() as any) })
-      );
-
-      setTeachers(list);
-      writeCache(K_AUTHORS, list); // 3) обновим кэш
-    } catch (e: any) {
-      console.error('Ошибка загрузки authors:', e);
-      setError(e?.message || 'Не удалось загрузить данные. Попробуйте ещё раз.');
-      setToastOpen(true);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    let unmounted = false;
-    (async () => {
-      if (!unmounted) await loadData();
-    })();
-    return () => { unmounted = true; };
-  }, []);
+  const loadData = () => setError(null);
 
   // Формируем список тегов на лету из документов
   const tags = useMemo(() => {
@@ -136,7 +69,7 @@ export default function NotesPageWeb() {
               action={
                 <Chip
                   label={loading ? 'Загружаем…' : 'Повторить'}
-                  onClick={() => loadData({ force: true })}   // форс-перезагрузка, минуя кэш
+                  onClick={() => loadData()}   // форс-перезагрузка, минуя кэш
                   color="default"
                   sx={{ bgcolor: 'rgba(255,255,255,0.25)', color: '#fff', fontWeight: 700 }}
                 />

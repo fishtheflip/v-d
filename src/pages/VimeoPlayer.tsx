@@ -10,20 +10,12 @@ import {
 } from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toPlayerUrl } from '../lib/videoUrl';
 
 const ORANGE = '#F97316';
 const SLATE = '#0f172a';
 
 /** Из любой vimeo-ссылки достаём id и собираем корректный player URL */
-function toVimeoPlayerUrl(input?: string | null) {
-  if (!input) return null;
-  if (/player\.vimeo\.com\/video\/\d+/.test(input)) return input;             // уже player URL
-  const m1 = input.match(/vimeo\.com\/(?:video\/)?(\d+)/);                     // обычная ссылка
-  if (m1) return `https://player.vimeo.com/video/${m1[1]}?autoplay=0&playsinline=1&title=0&byline=0&portrait=0`;
-  if (/^\d+$/.test(input))                                                     // чистый id
-    return `https://player.vimeo.com/video/${input}?autoplay=0&playsinline=1&title=0&byline=0&portrait=0`;
-  return input; // на крайний случай — отдадим как есть
-}
 
 /** Обёртка с фиксированным соотношением 16:9 */
 function VimeoPlayer({ src }: { src: string | null }) {
@@ -57,8 +49,9 @@ function VimeoPlayer({ src }: { src: string | null }) {
     >
       <iframe
         src={src}
-        title="Vimeo player"
-        allow="autoplay; fullscreen; picture-in-picture"
+        title="Видеоплеер урока"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; fullscreen; picture-in-picture"
         allowFullScreen
         style={{ border: 0, width: '100%', height: '100%', display: 'block' }}
       />
@@ -92,8 +85,7 @@ export default function VideoPageWeb() {
       courseItem?.videoUrl ||
       courseItem?.video ||
       courseItem?.url;
-    // fallback demo id можно убрать
-    return toVimeoPlayerUrl(fromState) ?? toVimeoPlayerUrl('76979871');
+    return toPlayerUrl(fromState, courseItem?.videoProvider);
   }, [courseItem]);
 
   return (

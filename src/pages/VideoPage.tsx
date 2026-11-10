@@ -112,6 +112,7 @@ export default function VideosPageWeb() {
       const ch = item as Choreo;
       navigate('/course', {
         state: {
+          id: ch.id,
           courseName: ch.name,
           imgUrl: ch.imgUrl,
           authorTitle: ch.Author,
