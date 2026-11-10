@@ -132,9 +132,8 @@ export default function LinksPage() {
                 fullWidth
                 size="large"
                 startIcon={<LanguageRoundedIcon />}
-                href="https://vite.dance"
-                target="_blank"
-                rel="noopener"
+                component={RouterLink}
+                to="/"
                 variant="contained"
                 sx={{
                   py: 1.2,
