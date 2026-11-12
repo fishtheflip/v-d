@@ -1,6 +1,94 @@
 {
   "courses": [
     {
+      "id": "askhat-locking1",
+      "documentId": "local-askhat-locking1",
+      "simpId": "locking1",
+      "courseName": "Locking",
+      "authorTitle": "Асхат",
+      "Authors": [{ "authorId": "askhat", "authorName": "Асхат" }],
+      "imgUrl": "/images/authors/askhat.jpg",
+      "imgPosition": "center 12%",
+      "seasonNum": 1,
+      "sumLessons": 12,
+      "popular": false,
+      "popPriority": 10,
+      "lessons": [
+        {
+          "name": "Intro",
+          "isOpen": true,
+          "videoProvider": "youtube",
+          "videoUrl": "https://www.youtube.com/watch?v=_KuuVPioIVY"
+        },
+        {
+          "name": "1 Locking Grooves: Funky, Body rock, Funky position, Swing Groove",
+          "isOpen": true,
+          "videoProvider": "youtube",
+          "videoUrl": "https://www.youtube.com/watch?v=r0qhTeptkq0"
+        },
+        {
+          "name": "2 Locking: Up, Lock, Twirl, Point, Pace, High five",
+          "isOpen": true,
+          "videoProvider": "youtube",
+          "videoUrl": "https://www.youtube.com/watch?v=I9Ai0WuGqnU"
+        },
+        {
+          "name": "3 Leo walk, Pimp walk, Six step",
+          "isOpen": true,
+          "videoProvider": "youtube",
+          "videoUrl": "https://www.youtube.com/watch?v=liFekYZkeVI"
+        },
+        {
+          "name": "4 Scoobot, Scooby doo, Scoobot hop, Skeeter rabbit",
+          "isOpen": false,
+          "videoProvider": "youtube",
+          "videoUrl": "https://www.youtube.com/watch?v=UaiAHc-slhI"
+        },
+        {
+          "name": "5 Rock steady, The bump, The seek",
+          "isOpen": false,
+          "videoProvider": "youtube",
+          "videoUrl": "https://www.youtube.com/watch?v=MkMyyCSmROQ"
+        },
+        {
+          "name": "6 Stop & Go",
+          "isOpen": false,
+          "videoProvider": "youtube",
+          "videoUrl": "https://www.youtube.com/watch?v=EFpA34jvkOY"
+        },
+        {
+          "name": "7 Robot shuffle, Хамбон, Which a way",
+          "isOpen": false,
+          "videoProvider": "youtube",
+          "videoUrl": "https://www.youtube.com/watch?v=6HswmuDIpdE"
+        },
+        {
+          "name": "8 James brown, 4 corner temptation walk, The freak",
+          "isOpen": false,
+          "videoProvider": "youtube",
+          "videoUrl": "https://www.youtube.com/watch?v=ZAUCnReIo3E"
+        },
+        {
+          "name": "9 Groove: смена сторон и ощущений во время танца",
+          "isOpen": false,
+          "videoProvider": "youtube",
+          "videoUrl": "https://www.youtube.com/watch?v=bpAlGu8XBFo"
+        },
+        {
+          "name": "10 Freestyle",
+          "isOpen": false,
+          "videoProvider": "youtube",
+          "videoUrl": "https://www.youtube.com/watch?v=kzaRCtkBFgA"
+        },
+        {
+          "name": "Outro",
+          "isOpen": false,
+          "videoProvider": "youtube",
+          "videoUrl": "https://www.youtube.com/watch?v=5qOwXV10quA"
+        }
+      ]
+    },
+    {
       "id": "31",
       "simpId": "break1",
       "courseId": 101,
@@ -1048,9 +1136,25 @@
       ],
       "imgurl": "https://i.ibb.co.com/23fXV21z/2025-10-21-14-53-00.png",
       "documentId": "VclGiMVCBQi1cSfEbd2n"
+    },
+    {
+      "id": "askhat",
+      "documentId": "local-askhat",
+      "simpId": "askhat",
+      "name": "Асхат",
+      "about": "Locking и Popping с Асхатом: знакомство с характером двух направлений, ритмом и выразительностью движений. В центре внимания — фанковое настроение, чёткие акценты и свобода самовыражения в танце.",
+      "category": ["locking", "popping"],
+      "imgurl": "/images/authors/askhat.jpg"
     }
   ],
   "categories": [
+    {
+      "id": "locking",
+      "documentId": "local-locking",
+      "name": "Locking",
+      "seasonCount": 1,
+      "coursesId": ["askhat-locking1"]
+    },
     {
       "id": 10004,
       "name": "Waacking",

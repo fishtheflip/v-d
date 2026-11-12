@@ -252,6 +252,7 @@ export default function HomePageWeb() {
                         'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200&auto=format&fit=crop'
                       }
                       alt={c.courseName}
+                      objectPosition={c.imgPosition}
                       sx={{
                         width: '100%',
                         height: { xs: 160, sm: 180, md: 200 },

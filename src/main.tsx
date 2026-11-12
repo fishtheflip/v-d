@@ -38,7 +38,7 @@ function ProtectedRoute() {
 
 createRoot(document.getElementById('root')!).render(
   <AuthProvider>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Suspense fallback={<Loading label="Загружаем..." minHeight={320} />}>
         <Routes>
           {/* Общий layout */}

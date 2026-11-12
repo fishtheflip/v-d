@@ -28,6 +28,7 @@ type Course = {
   authorTitle?: string;
   seasonNum?: number;
   imgUrl?: string;
+  imgPosition?: string;
   popPriority?: number;
   simpId?: string;
 };
@@ -214,6 +215,7 @@ export default function VideosPageWeb() {
                       <ImageWithSkeleton
                         src={image}
                         alt={title}
+                        objectPosition={isCourse ? (v as Course).imgPosition : undefined}
                         sx={{
                           width: '100%',
                           aspectRatio: '16 / 9',

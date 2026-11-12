@@ -7,6 +7,7 @@ type Props = {
   alt: string;
   sx?: SxProps<Theme>;
   objectFit?: 'cover' | 'contain';
+  objectPosition?: string;
   eager?: boolean;
 };
 
@@ -15,6 +16,7 @@ export default function ImageWithSkeleton({
   alt,
   sx,
   objectFit = 'cover',
+  objectPosition = 'center',
   eager = false,
 }: Props) {
   const [loaded, setLoaded] = useState(false);
@@ -54,6 +56,7 @@ export default function ImageWithSkeleton({
             width: '100%',
             height: '100%',
             objectFit,
+            objectPosition,
             opacity: loaded ? 1 : 0,
             transition: 'opacity 220ms ease',
           }}

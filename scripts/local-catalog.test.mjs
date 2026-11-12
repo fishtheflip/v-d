@@ -21,8 +21,8 @@ const catalog = await loadTypeScript(source);
 const { toPlayerUrl } = await loadTypeScript(await read('../src/lib/videoUrl.ts'));
 
 test('complete catalog and nested lesson data are retained', () => {
-  assert.deepEqual([catalog.courses.length, catalog.choreos.length, catalog.authors.length, catalog.categories.length], [7, 3, 9, 7]);
-  assert.equal([...catalog.courses, ...catalog.choreos].reduce((n, item) => n + item.lessons.length, 0), 92);
+  assert.deepEqual([catalog.courses.length, catalog.choreos.length, catalog.authors.length, catalog.categories.length], [8, 3, 10, 8]);
+  assert.equal([...catalog.courses, ...catalog.choreos].reduce((n, item) => n + item.lessons.length, 0), 104);
   for (const item of [...snapshot.courses, ...snapshot.choreos]) {
     const resolved = catalog.findCourse(item.documentId);
     assert.equal(resolved.lessons.length, item.lessons.length);
@@ -31,6 +31,74 @@ test('complete catalog and nested lesson data are retained', () => {
       assert.equal(resolved.lessons[index].isOpen, lesson.isOpen);
     });
   }
+});
+
+test('Askhat has a local portrait, biography and both style filters', async () => {
+  const author = catalog.findAuthor('askhat');
+  assert.equal(author.name, 'Асхат');
+  assert.deepEqual(author.category, ['locking', 'popping']);
+  assert.ok(author.about);
+  assert.equal(author.imgurl, '/images/authors/askhat.jpg');
+  const photo = await readFile(new URL(`../public${author.imgurl}`, import.meta.url));
+  assert.ok(photo.length > 0);
+});
+
+test('Locking Intro belongs to Askhat and embeds the supplied YouTube video', () => {
+  const course = catalog.findCourse('locking1');
+  assert.equal(course.authorTitle, catalog.findAuthor('askhat').name);
+  assert.equal(course.courseName, 'Locking');
+  assert.equal(course.lessons.length, 12);
+  assert.equal(course.lessons[11].name, 'Outro');
+  assert.equal(course.lessons[11].isOpen, false);
+  assert.equal(toPlayerUrl(course.lessons[11].videoUrl, course.lessons[11].videoProvider),
+    'https://www.youtube-nocookie.com/embed/5qOwXV10quA?playsinline=1&rel=0');
+  assert.equal(course.lessons[10].name, '10 Freestyle');
+  assert.equal(course.lessons[10].isOpen, false);
+  assert.equal(toPlayerUrl(course.lessons[10].videoUrl, course.lessons[10].videoProvider),
+    'https://www.youtube-nocookie.com/embed/kzaRCtkBFgA?playsinline=1&rel=0');
+  assert.equal(course.lessons[9].name, '9 Groove: смена сторон и ощущений во время танца');
+  assert.equal(course.lessons[9].isOpen, false);
+  assert.equal(toPlayerUrl(course.lessons[9].videoUrl, course.lessons[9].videoProvider),
+    'https://www.youtube-nocookie.com/embed/bpAlGu8XBFo?playsinline=1&rel=0');
+  assert.equal(course.lessons[8].name, '8 James brown, 4 corner temptation walk, The freak');
+  assert.equal(course.lessons[8].isOpen, false);
+  assert.equal(toPlayerUrl(course.lessons[8].videoUrl, course.lessons[8].videoProvider),
+    'https://www.youtube-nocookie.com/embed/ZAUCnReIo3E?playsinline=1&rel=0');
+  assert.equal(course.lessons[7].name, '7 Robot shuffle, Хамбон, Which a way');
+  assert.equal(course.lessons[7].isOpen, false);
+  assert.equal(toPlayerUrl(course.lessons[7].videoUrl, course.lessons[7].videoProvider),
+    'https://www.youtube-nocookie.com/embed/6HswmuDIpdE?playsinline=1&rel=0');
+  assert.equal(course.lessons[6].name, '6 Stop & Go');
+  assert.equal(course.lessons[6].isOpen, false);
+  assert.equal(toPlayerUrl(course.lessons[6].videoUrl, course.lessons[6].videoProvider),
+    'https://www.youtube-nocookie.com/embed/EFpA34jvkOY?playsinline=1&rel=0');
+  assert.equal(course.lessons[5].name, '5 Rock steady, The bump, The seek');
+  assert.equal(course.lessons[5].isOpen, false);
+  assert.equal(toPlayerUrl(course.lessons[5].videoUrl, course.lessons[5].videoProvider),
+    'https://www.youtube-nocookie.com/embed/MkMyyCSmROQ?playsinline=1&rel=0');
+  assert.equal(course.lessons[4].name, '4 Scoobot, Scooby doo, Scoobot hop, Skeeter rabbit');
+  assert.equal(course.lessons[4].isOpen, false);
+  assert.equal(toPlayerUrl(course.lessons[4].videoUrl, course.lessons[4].videoProvider),
+    'https://www.youtube-nocookie.com/embed/UaiAHc-slhI?playsinline=1&rel=0');
+  assert.equal(course.lessons[3].name, '3 Leo walk, Pimp walk, Six step');
+  assert.equal(course.lessons[3].isOpen, true);
+  assert.deepEqual(course.lessons.map(lesson => lesson.isOpen),
+    [true, true, true, true, false, false, false, false, false, false, false, false]);
+  assert.equal(toPlayerUrl(course.lessons[3].videoUrl, course.lessons[3].videoProvider),
+    'https://www.youtube-nocookie.com/embed/liFekYZkeVI?playsinline=1&rel=0');
+  assert.equal(course.lessons[2].name, '2 Locking: Up, Lock, Twirl, Point, Pace, High five');
+  assert.equal(course.lessons[2].isOpen, true);
+  assert.equal(toPlayerUrl(course.lessons[2].videoUrl, course.lessons[2].videoProvider),
+    'https://www.youtube-nocookie.com/embed/I9Ai0WuGqnU?playsinline=1&rel=0');
+  assert.equal(course.sumLessons, course.lessons.length);
+  assert.equal(course.lessons[1].name, '1 Locking Grooves: Funky, Body rock, Funky position, Swing Groove');
+  assert.equal(course.lessons[1].isOpen, true);
+  assert.equal(toPlayerUrl(course.lessons[1].videoUrl, course.lessons[1].videoProvider),
+    'https://www.youtube-nocookie.com/embed/r0qhTeptkq0?playsinline=1&rel=0');
+  assert.equal(course.lessons[0].name, 'Intro');
+  assert.equal(course.lessons[0].isOpen, true);
+  assert.equal(toPlayerUrl(course.lessons[0].videoUrl, course.lessons[0].videoProvider),
+    'https://www.youtube-nocookie.com/embed/_KuuVPioIVY?playsinline=1&rel=0');
 });
 
 test('courses resolve by legacy ID, slug and Firestore ID', () => {

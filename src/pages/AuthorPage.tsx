@@ -13,7 +13,7 @@ import { findAuthor, courses as localCourses, choreos as localChoreos } from '..
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
 type AuthorDoc = { id?: string; simpId?: string; name: string; about?: string; imgurl?: string; };
-type Course = { id: string; courseName: string; authorTitle?: string; seasonNum?: number; imgUrl?: string; simpId?: string; popPriority?: number; };
+type Course = { id: string; courseName: string; authorTitle?: string; seasonNum?: number; imgUrl?: string; imgPosition?: string; simpId?: string; popPriority?: number; };
 type Choreo = { id: string; name: string; Author?: string; authors?: string[]; imgUrl?: string; simpId?: string; };
 
 function useAuthorFromRoute(): { author: AuthorDoc | null; loading: boolean; error: string | null } {
@@ -215,6 +215,7 @@ const AuthorPageWeb: React.FC = () => {
                             'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200&auto=format&fit=crop'
                         }
                         alt={c.courseName}
+                        objectPosition={c.imgPosition}
                         sx={{
                             width: '100%',
                             aspectRatio: '16 / 9',

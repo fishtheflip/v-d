@@ -28,6 +28,7 @@ export type CatalogCourse = {
   sumLessons?: number | string;
   level?: string;
   imgUrl?: string;
+  imgPosition?: string;
   popular?: boolean;
   popPriority?: number;
   lessons?: CatalogLesson[];
@@ -48,11 +49,16 @@ export type CatalogAuthor = {
 
 const overrides: Record<string, Record<string, string>> = videoOverrides;
 
+function publicImage(url?: string) {
+  return url?.startsWith('/') ? `${import.meta.env?.BASE_URL || '/'}${url.slice(1)}` : url;
+}
+
 function normalizeCourse(item: CatalogCourse): CatalogCourse {
   const simpId = item.simpId || item.simpid;
   const links = overrides[simpId || item.id];
   return {
     ...item,
+    imgUrl: publicImage(item.imgUrl),
     id: String(item.id),
     simpId,
     lessons: item.lessons?.map(lesson => {
@@ -72,7 +78,7 @@ export const choreos = snapshot.choreos.map(item => ({
   name: item.name,
   authors: item.authors,
 })) as CatalogChoreo[];
-export const authors = snapshot.authors.map(item => ({ ...item, id: String(item.id) })) as CatalogAuthor[];
+export const authors = snapshot.authors.map(item => ({ ...item, imgurl: publicImage(item.imgurl), id: String(item.id) })) as CatalogAuthor[];
 export const categories = snapshot.categories.map(item => ({ ...item, id: String(item.id) }));
 
 export function findCourse(slug: string, kind?: 'course' | 'choreo') {
